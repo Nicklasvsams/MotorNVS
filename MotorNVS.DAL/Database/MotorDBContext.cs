@@ -9,14 +9,14 @@ namespace MotorNVS.DAL.Database
 
         public MotorDBContext(DbContextOptions<MotorDBContext> contextOptions) : base(contextOptions) { }
 
-        DbSet<Zipcode> Zipcode { get; set; }
-        DbSet<Address> Address { get; set; }
-        DbSet<Customer> Customer { get; set; }
-        DbSet<Fuel> Fuel { get; set; }
-        DbSet<Category> Category { get; set; }
-        DbSet<Vehicle> Vehicle { get; set; }
-        DbSet<Registration> Registration { get; set; }
-        DbSet<Login> Login { get; set; }
+        public DbSet<Zipcode> Zipcode { get; set; }
+        public DbSet<Address> Address { get; set; }
+        public DbSet<Customer> Customer { get; set; }
+        public DbSet<Fuel> Fuel { get; set; }
+        public DbSet<Category> Category { get; set; }
+        public DbSet<Vehicle> Vehicle { get; set; }
+        public DbSet<Registration> Registration { get; set; }
+        public DbSet<Login> Login { get; set; }
  
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,14 +39,14 @@ namespace MotorNVS.DAL.Database
                 {
                     Id = 1,
                     StreetAndNo = "Bakkevej 18",
-                    CreateDate = DateTimeOffset.Now,
+                    CreateDate = DateTime.Now,
                     ZipCodeId = 2
                 },
                 new Address()
                 {
                     Id = 2,
                     StreetAndNo = "Pladehalebakke 15",
-                    CreateDate = DateTimeOffset.Now,
+                    CreateDate = DateTime.Now,
                     ZipCodeId = 1
                 });
 
@@ -56,7 +56,7 @@ namespace MotorNVS.DAL.Database
                     Id = 1,
                     FirstName = "Nicklas",
                     LastName = "Sams",
-                    CreateDate = DateTimeOffset.Now,
+                    CreateDate = DateTime.Now,
                     AddressId = 2
                 },
                 new Customer()
@@ -64,11 +64,77 @@ namespace MotorNVS.DAL.Database
                     Id = 2,
                     FirstName = "Henning",
                     LastName = "Bjarkesen",
-                    CreateDate = DateTimeOffset.Now,
+                    CreateDate = DateTime.Now,
                     AddressId = 1
                 });
 
-            // TODO: Add more testdata
+            modelBuilder.Entity<Fuel>().HasData(
+                new Fuel()
+                {
+                    Id = 1,
+                    FuelName = "Gasoline"
+                },
+                new Fuel()
+                {
+                    Id = 2,
+                    FuelName = "Diesel"
+                });
+
+            modelBuilder.Entity<Category>().HasData(
+                new Category()
+                {
+                    Id = 1,
+                    CategoryName = "Convertible"
+                },
+                new Category()
+                {
+                    Id = 2,
+                    CategoryName = "SUV"
+                });
+
+            modelBuilder.Entity<Vehicle>().HasData(
+                new Vehicle()
+                {
+                    Id = 1,
+                    Make = "Suzuki",
+                    Model = "Vitara",
+                    CategoryId = 2,
+                    FuelId = 1,
+                    CreateDate = DateTime.Now
+                },
+                new Vehicle()
+                {
+                    Id = 2,
+                    Make = "Volkswagen",
+                    Model = "Beetle Turbo",
+                    CategoryId = 1,
+                    FuelId = 2,
+                    CreateDate = DateTime.Now
+                });
+
+            modelBuilder.Entity<Registration>().HasData(
+                new Registration()
+                {
+                    Id = 1,
+                    CustomerId = 1,
+                    VehicleId = 2,
+                    CreateDate = DateTime.Now
+                },
+                new Registration()
+                {
+                    Id = 2,
+                    CustomerId = 2,
+                    VehicleId = 1,
+                    CreateDate = DateTime.Now
+                });
+
+            modelBuilder.Entity<Login>().HasData(
+                new Login()
+                {
+                    Id = 1,
+                    Username = "admin",
+                    Password = "Passw0rd"
+                });
         }
     }
 }

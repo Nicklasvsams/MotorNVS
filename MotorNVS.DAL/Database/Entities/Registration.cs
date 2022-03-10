@@ -8,7 +8,7 @@ namespace MotorNVS.DAL.Database.Entities
         [Key]
         public int Id { get; set; }
         [Column(TypeName = "date")]
-        public DateTimeOffset CreateDate { get; set; }
+        public DateTime CreateDate { get; set; }
         [Column(TypeName = "int")]
         public int CustomerId { get; set; }
         [Column(TypeName = "int")]

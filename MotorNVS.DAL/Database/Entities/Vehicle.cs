@@ -12,11 +12,11 @@ namespace MotorNVS.DAL.Database.Entities
         [Column(TypeName = "nvarchar(50)")]
         public string Model { get; set; }
         [Column(TypeName = "date")]
-        public DateTimeOffset CreateDate { get; set; }
+        public DateTime CreateDate { get; set; }
         [Column(TypeName = "int")]
         public int CategoryId { get; set; }
         [Column(TypeName = "int")]
-        public int FueldId { get; set; }
+        public int FuelId { get; set; }
 
         public Category Category { get; set; }
         public Fuel Fuel { get; set; }

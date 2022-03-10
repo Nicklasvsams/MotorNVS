@@ -10,7 +10,7 @@ namespace MotorNVS.DAL.Database.Entities
         [Column(TypeName = "nvarchar(100)")]
         public string StreetAndNo { get; set; }
         [Column(TypeName = "date")]
-        public DateTimeOffset CreateDate { get; set; }
+        public DateTime CreateDate { get; set; }
         [Column(TypeName = "int")]
         public int ZipCodeId { get; set; }
 

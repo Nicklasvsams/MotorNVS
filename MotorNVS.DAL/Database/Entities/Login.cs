@@ -9,7 +9,7 @@ namespace MotorNVS.DAL.Database.Entities
         public int Id { get; set; }
         [Column(TypeName = "nvarchar(20)")]
         public string Username { get; set; }
-        [Column(TypeName = "nvarchar100")]
+        [Column(TypeName = "nvarchar(100)")]
         public string Password { get; set; }
     }
 }

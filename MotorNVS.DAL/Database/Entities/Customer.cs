@@ -12,7 +12,7 @@ namespace MotorNVS.DAL.Database.Entities
         [Column(TypeName = "nvarchar(50)")]
         public string LastName { get; set; }
         [Column(TypeName = "date")]
-        public DateTimeOffset CreateDate { get; set; }
+        public DateTime CreateDate { get; set; }
         [Column(TypeName = "int")]
         public int AddressId { get; set; }
 
