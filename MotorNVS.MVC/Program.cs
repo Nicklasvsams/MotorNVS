@@ -1,7 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using MotorNVS.DAL.Database;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<MotorDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MotorDBContext")));
 
 var app = builder.Build();
 
