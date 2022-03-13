@@ -22,8 +22,6 @@ namespace MotorNVS.BL.Services
             _fuelRepository = fuelRepository;
         }
 
-        
-
         public async Task<List<FuelResponse>> GetAllFuels()
         {
             List<Fuel> fuelList = await _fuelRepository.SelectAllFuels();
