@@ -6,8 +6,8 @@ namespace MotorNVS.DAL.Repositories
 {
     public interface IFuelRepository
     {
-        Task<List<Fuel>> GetAllFuels();
-        Task<Fuel> GetFuelById(int fuelId);
+        Task<List<Fuel>> SelectAllFuels();
+        Task<Fuel> SelectFuelById(int fuelId);
         Task<Fuel> InsertNewFuel(Fuel fuel);
         Task<Fuel> DeleteFuelById(int fuelId);
         Task<Fuel> UpdateFuelById(int fuelId, Fuel fuel);
@@ -38,14 +38,14 @@ namespace MotorNVS.DAL.Repositories
             return fuelToDelete;
         }
 
-        public async Task<Fuel> GetFuelById(int fuelId)
+        public async Task<Fuel> SelectFuelById(int fuelId)
         {
             return await _dBContext
                 .Fuel
                 .FirstOrDefaultAsync(x => x.Id == fuelId);
         }
 
-        public async Task<List<Fuel>> GetAllFuels()
+        public async Task<List<Fuel>> SelectAllFuels()
         {
             return await _dBContext
                 .Fuel

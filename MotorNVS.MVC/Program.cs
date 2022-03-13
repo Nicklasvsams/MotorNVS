@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MotorNVS.BL.Services;
 using MotorNVS.DAL.Database;
 using MotorNVS.DAL.Repositories;
 
@@ -10,6 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<MotorDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MotorDBContext")));
 
 builder.Services.AddScoped<IFuelRepository, FuelRepository>();
+builder.Services.AddScoped<IFuelService, FuelService>();
 
 var app = builder.Build();
 

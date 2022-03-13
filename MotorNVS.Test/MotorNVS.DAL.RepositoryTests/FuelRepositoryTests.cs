@@ -35,7 +35,7 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
             await _dBContext.SaveChangesAsync();
 
             // Act
-            var result = await _fuelRepository.GetAllFuels();
+            var result = await _fuelRepository.SelectAllFuels();
 
             // Assert
             Assert.NotNull(result);
@@ -50,7 +50,7 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
             await _dBContext.Database.EnsureDeletedAsync();
 
             // Act
-            var result = await _fuelRepository.GetAllFuels();
+            var result = await _fuelRepository.SelectAllFuels();
 
             // Assert
             Assert.NotNull(result);
@@ -71,7 +71,7 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
             await _dBContext.SaveChangesAsync();
 
             // Act
-            var result = await _fuelRepository.GetFuelById(fuelId);
+            var result = await _fuelRepository.SelectFuelById(fuelId);
 
             // Assert
             Assert.NotNull(result);
@@ -88,7 +88,7 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
             await _dBContext.Database.EnsureDeletedAsync();
 
             // Act
-            var result = await _fuelRepository.GetFuelById(fuelId);
+            var result = await _fuelRepository.SelectFuelById(fuelId);
 
             // Assert
             Assert.Null(result);
