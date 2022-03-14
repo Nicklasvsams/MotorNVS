@@ -50,8 +50,8 @@ namespace MotorNVS.DAL.Repositories
         {
             return await _dBContext
                 .Vehicle
-                .Include("Category")
-                .Include("Fuel")
+                .Include(x => x.Category)
+                .Include(x => x.Fuel)
                 .ToListAsync();
         }
 

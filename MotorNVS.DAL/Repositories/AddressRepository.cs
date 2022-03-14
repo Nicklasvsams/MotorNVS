@@ -13,7 +13,7 @@ namespace MotorNVS.DAL.Repositories
         Task<Address> UpdateAddressById(int addressId, Address address);
     }
 
-    internal class AddressRepository : IAddressRepository
+    public class AddressRepository : IAddressRepository
     {
         private readonly MotorDBContext _dBContext;
 

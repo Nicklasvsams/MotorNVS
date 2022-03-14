@@ -13,6 +13,21 @@ builder.Services.AddDbContext<MotorDBContext>(options => options.UseSqlServer(bu
 builder.Services.AddScoped<IFuelRepository, FuelRepository>();
 builder.Services.AddScoped<IFuelService, FuelService>();
 
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
+builder.Services.AddScoped<IVehicleService, VehicleService>();
+
+builder.Services.AddScoped<IZipcodeRepository, ZipcodeRepository>();
+builder.Services.AddScoped<IZipcodeService, ZipcodeService>();
+
+builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+builder.Services.AddScoped<IAddressService, AddressService>();
+
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

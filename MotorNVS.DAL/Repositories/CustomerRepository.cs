@@ -49,8 +49,8 @@ namespace MotorNVS.DAL.Repositories
         {
             return await _dBContext
                 .Customer
-                .Include("Address")
-                .Include("Zipcode")
+                .Include(x => x.Address)
+                .Include(x => x.Address.Zipcode)
                 .ToListAsync();
         }
 
@@ -58,8 +58,8 @@ namespace MotorNVS.DAL.Repositories
         {
             return await _dBContext
                 .Customer
-                .Include("Address")
-                .Include("Zipcode")
+                .Include(x => x.Address)
+                .Include(x => x.Address.Zipcode)
                 .FirstOrDefaultAsync(x => x.Id == customerId);
         }
 
