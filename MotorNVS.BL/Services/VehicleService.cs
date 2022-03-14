@@ -89,12 +89,12 @@ namespace MotorNVS.BL.Services
                 CreateDate = vehicle.CreateDate,
                 CategoryId = vehicle.CategoryId,
                 FuelId = vehicle.FuelId,
-                Category = new CategoryResponse()
+                CategoryResponse = new CategoryResponse()
                 {
                     Id = vehicle.Category.Id,
                     CategoryName = vehicle.Category.CategoryName
                 },
-                Fuel = new FuelResponse()
+                FuelResponse = new FuelResponse()
                 {
                     Id = vehicle.Fuel.Id,
                     FuelName = vehicle.Fuel.FuelName

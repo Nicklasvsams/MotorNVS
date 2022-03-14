@@ -12,7 +12,7 @@ namespace MotorNVS.BL.DTOs.VehicleDTO
         public int CategoryId { get; set; }
         public int FuelId { get; set; }
 
-        public CategoryResponse Category { get; set; }
-        public FuelResponse Fuel { get; set; }
+        public CategoryResponse CategoryResponse { get; set; }
+        public FuelResponse FuelResponse { get; set; }
     }
 }

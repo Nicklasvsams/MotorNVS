@@ -15,9 +15,12 @@ namespace MotorNVS.MVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            List<CustomerResponse> customers = await _customerService.GetAllCustomers();
+            CustomerResponse customer = await _customerService.GetCustomerById(2);
 
-            ViewBag.CustomerResponses = customers;
+            if (customer != null)
+            {
+                ViewBag.CustomerResponse = customer;
+            }
 
             return View();
         }
