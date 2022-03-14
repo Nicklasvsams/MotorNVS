@@ -28,6 +28,9 @@ builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 
+builder.Services.AddScoped<IRegistrationRepository, RegistrationRepository>();
+builder.Services.AddScoped<IRegistrationService, RegistrationService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
