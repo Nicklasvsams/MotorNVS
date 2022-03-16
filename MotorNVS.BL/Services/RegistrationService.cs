@@ -45,7 +45,7 @@ namespace MotorNVS.BL.Services
 
             if (deletedRegistration != null)
             {
-                MapRegistrationToRegistrationResponse(deletedRegistration);
+                return MapRegistrationToRegistrationResponse(deletedRegistration);
             }
 
             return null;

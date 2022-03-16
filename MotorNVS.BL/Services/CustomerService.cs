@@ -42,7 +42,7 @@ namespace MotorNVS.BL.Services
 
             if (deletedCustomer != null)
             {
-                MapCustomerToCustomerResponse(deletedCustomer);
+                return MapCustomerToCustomerResponse(deletedCustomer);
             }
 
             return null;

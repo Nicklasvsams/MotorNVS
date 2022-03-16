@@ -77,6 +77,7 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
             Assert.NotNull(result);
             Assert.IsType<Fuel>(result);
             Assert.Equal(fuelId, result.Id);
+            Assert.Equal("Test", result.FuelName);
         }
 
         [Fact]
