@@ -12,8 +12,8 @@ using MotorNVS.DAL.Database;
 namespace MotorNVS.DAL.Migrations
 {
     [DbContext(typeof(MotorDBContext))]
-    [Migration("20220310222105_Initial")]
-    partial class Initial
+    [Migration("20220316195626_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -52,14 +52,14 @@ namespace MotorNVS.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2022, 3, 10, 23, 21, 4, 102, DateTimeKind.Local).AddTicks(1331),
+                            CreateDate = new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(176),
                             StreetAndNo = "Bakkevej 18",
                             ZipCodeId = 2
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2022, 3, 10, 23, 21, 4, 102, DateTimeKind.Local).AddTicks(1410),
+                            CreateDate = new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(252),
                             StreetAndNo = "Pladehalebakke 15",
                             ZipCodeId = 1
                         });
@@ -127,7 +127,7 @@ namespace MotorNVS.DAL.Migrations
                         {
                             Id = 1,
                             AddressId = 2,
-                            CreateDate = new DateTime(2022, 3, 10, 23, 21, 4, 102, DateTimeKind.Local).AddTicks(1513),
+                            CreateDate = new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(354),
                             FirstName = "Nicklas",
                             LastName = "Sams"
                         },
@@ -135,7 +135,7 @@ namespace MotorNVS.DAL.Migrations
                         {
                             Id = 2,
                             AddressId = 1,
-                            CreateDate = new DateTime(2022, 3, 10, 23, 21, 4, 102, DateTimeKind.Local).AddTicks(1532),
+                            CreateDate = new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(374),
                             FirstName = "Henning",
                             LastName = "Bjarkesen"
                         });
@@ -207,11 +207,11 @@ namespace MotorNVS.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("date");
-
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("date");
 
                     b.Property<int>("VehicleId")
                         .HasColumnType("int");
@@ -228,15 +228,15 @@ namespace MotorNVS.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2022, 3, 10, 23, 21, 4, 102, DateTimeKind.Local).AddTicks(1899),
                             CustomerId = 1,
+                            RegistrationDate = new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(712),
                             VehicleId = 2
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2022, 3, 10, 23, 21, 4, 102, DateTimeKind.Local).AddTicks(1917),
                             CustomerId = 2,
+                            RegistrationDate = new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(730),
                             VehicleId = 1
                         });
                 });
@@ -279,7 +279,7 @@ namespace MotorNVS.DAL.Migrations
                         {
                             Id = 1,
                             CategoryId = 2,
-                            CreateDate = new DateTime(2022, 3, 10, 23, 21, 4, 102, DateTimeKind.Local).AddTicks(1780),
+                            CreateDate = new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(601),
                             FuelId = 1,
                             Make = "Suzuki",
                             Model = "Vitara"
@@ -288,7 +288,7 @@ namespace MotorNVS.DAL.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2022, 3, 10, 23, 21, 4, 102, DateTimeKind.Local).AddTicks(1801),
+                            CreateDate = new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(624),
                             FuelId = 2,
                             Make = "Volkswagen",
                             Model = "Beetle Turbo"

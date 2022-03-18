@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MotorNVS.DAL.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -141,7 +141,7 @@ namespace MotorNVS.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CreateDate = table.Column<DateTime>(type: "date", nullable: false),
+                    RegistrationDate = table.Column<DateTime>(type: "date", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     VehicleId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -199,8 +199,8 @@ namespace MotorNVS.DAL.Migrations
                 columns: new[] { "Id", "CreateDate", "StreetAndNo", "ZipCodeId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 3, 10, 23, 21, 4, 102, DateTimeKind.Local).AddTicks(1331), "Bakkevej 18", 2 },
-                    { 2, new DateTime(2022, 3, 10, 23, 21, 4, 102, DateTimeKind.Local).AddTicks(1410), "Pladehalebakke 15", 1 }
+                    { 1, new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(176), "Bakkevej 18", 2 },
+                    { 2, new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(252), "Pladehalebakke 15", 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -208,29 +208,29 @@ namespace MotorNVS.DAL.Migrations
                 columns: new[] { "Id", "CategoryId", "CreateDate", "FuelId", "Make", "Model" },
                 values: new object[,]
                 {
-                    { 1, 2, new DateTime(2022, 3, 10, 23, 21, 4, 102, DateTimeKind.Local).AddTicks(1780), 1, "Suzuki", "Vitara" },
-                    { 2, 1, new DateTime(2022, 3, 10, 23, 21, 4, 102, DateTimeKind.Local).AddTicks(1801), 2, "Volkswagen", "Beetle Turbo" }
+                    { 1, 2, new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(601), 1, "Suzuki", "Vitara" },
+                    { 2, 1, new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(624), 2, "Volkswagen", "Beetle Turbo" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Customer",
                 columns: new[] { "Id", "AddressId", "CreateDate", "FirstName", "LastName" },
-                values: new object[] { 1, 2, new DateTime(2022, 3, 10, 23, 21, 4, 102, DateTimeKind.Local).AddTicks(1513), "Nicklas", "Sams" });
+                values: new object[] { 1, 2, new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(354), "Nicklas", "Sams" });
 
             migrationBuilder.InsertData(
                 table: "Customer",
                 columns: new[] { "Id", "AddressId", "CreateDate", "FirstName", "LastName" },
-                values: new object[] { 2, 1, new DateTime(2022, 3, 10, 23, 21, 4, 102, DateTimeKind.Local).AddTicks(1532), "Henning", "Bjarkesen" });
+                values: new object[] { 2, 1, new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(374), "Henning", "Bjarkesen" });
 
             migrationBuilder.InsertData(
                 table: "Registration",
-                columns: new[] { "Id", "CreateDate", "CustomerId", "VehicleId" },
-                values: new object[] { 1, new DateTime(2022, 3, 10, 23, 21, 4, 102, DateTimeKind.Local).AddTicks(1899), 1, 2 });
+                columns: new[] { "Id", "CustomerId", "RegistrationDate", "VehicleId" },
+                values: new object[] { 1, 1, new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(712), 2 });
 
             migrationBuilder.InsertData(
                 table: "Registration",
-                columns: new[] { "Id", "CreateDate", "CustomerId", "VehicleId" },
-                values: new object[] { 2, new DateTime(2022, 3, 10, 23, 21, 4, 102, DateTimeKind.Local).AddTicks(1917), 2, 1 });
+                columns: new[] { "Id", "CustomerId", "RegistrationDate", "VehicleId" },
+                values: new object[] { 2, 2, new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(730), 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Address_ZipCodeId",

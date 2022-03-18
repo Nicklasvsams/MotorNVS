@@ -1,0 +1,40 @@
+﻿@using MotorNVS.BL.DTOs.RegistrationDTO
+@{
+    @model RegistrationListViewModel
+    @if (@Model.List.Count != 0)
+    {
+        foreach (RegistrationResponse registration in @Model.List)
+        {
+            <div class="registration-card">
+                <p><b>Registration ID: @registration.Id</b></p>
+                <br />
+                <p><b>Customer ID: @registration.CustomerId</b></p>
+                <p>First name: @registration.CustomerResponse.FirstName</p>
+                <p>Last name: @registration.CustomerResponse.LastName</p>
+                <p>Date created: @registration.CustomerResponse.CreateDate</p>
+                <br />
+                <p><b>Address ID: @registration.CustomerResponse.AddressId</b></p>
+                <p>Address: @registration.CustomerResponse.AddressResponse.StreetAndNo</p>
+                <br />
+                <p><b>Zipcode ID: @registration.CustomerResponse.AddressResponse.ZipcodeId</b></p>
+                <p>Zipcode number: @registration.CustomerResponse.AddressResponse.ZipcodeResponse.ZipcodeNo</p>
+                <p>City: @registration.CustomerResponse.AddressResponse.ZipcodeResponse.City</p>
+                <br />
+                <p><b>Vehicle ID: @registration.VehicleId</b></p>
+                <p>Make: @registration.VehicleResponse.Make</p>
+                <p>Model: @registration.VehicleResponse.Model</p>
+                <br />
+                <p><b>Category ID: @registration.VehicleResponse.CategoryId</b></p>
+                <p>Category name: @registration.VehicleResponse.CategoryResponse.CategoryName</p>
+                <br />
+                <p><b>Fuel ID: @registration.VehicleResponse.FuelId</b></p>
+                <p>Fuel name: @registration.VehicleResponse.FuelResponse.FuelName</p>
+            </div>
+        }
+    }
+    else
+    {
+          <p>No data was found</p>
+    
+    }
+}
