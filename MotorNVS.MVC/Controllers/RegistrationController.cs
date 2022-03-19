@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MotorNVS.BL.DTOs.RegistrationDTO;
 using MotorNVS.BL.Services;
 using MotorNVS.MVC.Models;
 
@@ -16,11 +17,11 @@ namespace MotorNVS.MVC.Controllers
         // GET: RegistrationController
         public async Task<ActionResult> Index()
         {
-            RegistrationListViewModel registrations = new RegistrationListViewModel();
+            List<RegistrationResponse> registrations = new List<RegistrationResponse>();
 
             try
             {
-                registrations.List = await _registrationService.GetAllRegistrations();
+                registrations = await _registrationService.GetAllRegistrations();
 
                 return View(registrations);
             }
@@ -45,15 +46,17 @@ namespace MotorNVS.MVC.Controllers
         // POST: RegistrationController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(RegistrationRequest registration)
         {
             try
             {
+                _registrationService.CreateRegistration(registration);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
         }
 
@@ -79,23 +82,17 @@ namespace MotorNVS.MVC.Controllers
         }
 
         // GET: RegistrationController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: RegistrationController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
+                await _registrationService.DeleteRegistrationById(id);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
         }
     }

@@ -84,13 +84,17 @@ namespace MotorNVS.BL.Services
 
         private static RegistrationResponse MapRegistrationToRegistrationResponse(Registration registration)
         {
-            return new RegistrationResponse()
+            RegistrationResponse regRes = new RegistrationResponse()
             {
                 Id = registration.Id,
                 RegistrationDate = registration.RegistrationDate,
                 CustomerId = registration.CustomerId,
-                VehicleId = registration.VehicleId,
-                CustomerResponse = new CustomerResponse()
+                VehicleId = registration.VehicleId
+            };
+
+            if (registration.Customer != null && registration.Vehicle != null)
+            {
+                regRes.CustomerResponse = new CustomerResponse()
                 {
                     Id = registration.Customer.Id,
                     FirstName = registration.Customer.FirstName,
@@ -110,8 +114,8 @@ namespace MotorNVS.BL.Services
                             City = registration.Customer.Address.Zipcode.City
                         }
                     }
-                },
-                VehicleResponse = new VehicleResponse()
+                };
+                regRes.VehicleResponse = new VehicleResponse()
                 {
                     Id = registration.Vehicle.Id,
                     Make = registration.Vehicle.Make,
@@ -129,8 +133,10 @@ namespace MotorNVS.BL.Services
                         Id = registration.Vehicle.Fuel.Id,
                         FuelName = registration.Vehicle.Fuel.FuelName
                     }
-                }
+                };
             };
+
+            return regRes;
         }
 
         private static Registration MapRegistrationRequestToRegistration(RegistrationRequest registrationReq)

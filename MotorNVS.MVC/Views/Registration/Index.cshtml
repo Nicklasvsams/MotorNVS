@@ -1,17 +1,18 @@
 ﻿@using MotorNVS.BL.DTOs.RegistrationDTO
 @{
-    @model RegistrationListViewModel
-    @if (@Model.List.Count != 0)
+    @model List<RegistrationResponse>
+    @if (@Model.Count != 0)
     {
-        foreach (RegistrationResponse registration in @Model.List)
-        {
+        <div class="container d-flex justify-content-around flex-row flex-wrap">
+            @foreach (RegistrationResponse registration in @Model)
+            {
             <div class="registration-card">
-                <p><b>Registration ID: @registration.Id</b></p>
+                <p class="reg-id"><b>Registration ID: @registration.Id</b></p>
                 <br />
                 <p><b>Customer ID: @registration.CustomerId</b></p>
                 <p>First name: @registration.CustomerResponse.FirstName</p>
                 <p>Last name: @registration.CustomerResponse.LastName</p>
-                <p>Date created: @registration.CustomerResponse.CreateDate</p>
+                <p>Date created: @registration.CustomerResponse.CreateDate.ToShortDateString()</p>
                 <br />
                 <p><b>Address ID: @registration.CustomerResponse.AddressId</b></p>
                 <p>Address: @registration.CustomerResponse.AddressResponse.StreetAndNo</p>
@@ -29,12 +30,15 @@
                 <br />
                 <p><b>Fuel ID: @registration.VehicleResponse.FuelId</b></p>
                 <p>Fuel name: @registration.VehicleResponse.FuelResponse.FuelName</p>
+                @Html.ActionLink("Delete", "Delete", new { id = registration.Id })
             </div>
-        }
+            }
+
+        </div>
     }
     else
     {
-          <p>No data was found</p>
-    
+        <p>No data was found</p>
+
     }
 }

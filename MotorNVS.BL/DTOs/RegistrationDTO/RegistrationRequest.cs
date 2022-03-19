@@ -7,7 +7,7 @@ namespace MotorNVS.BL.DTOs.RegistrationDTO
         [Required]
         public int Id { get; set; }
         [Required]
-        public DateTime RegistrationDate { get; set; }
+        public DateTime RegistrationDate { get; set; } = DateTime.Now;
         [Required]
         public int CustomerId { get; set; }
         [Required]
