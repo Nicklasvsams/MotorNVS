@@ -72,6 +72,8 @@ namespace MotorNVS.DAL.Repositories
             {
                 addressToUpdate.StreetAndNo = address.StreetAndNo;
                 addressToUpdate.ZipCodeId = address.ZipCodeId;
+
+                await _dBContext.SaveChangesAsync();
             }
 
             return addressToUpdate;

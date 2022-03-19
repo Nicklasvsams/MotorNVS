@@ -77,6 +77,8 @@ namespace MotorNVS.DAL.Repositories
                 vehicleToUpdate.CreateDate = vehicle.CreateDate;
                 vehicleToUpdate.CategoryId = vehicle.CategoryId;
                 vehicleToUpdate.FuelId = vehicle.FuelId;
+
+                await _dBContext.SaveChangesAsync();
             }
 
             return vehicleToUpdate;

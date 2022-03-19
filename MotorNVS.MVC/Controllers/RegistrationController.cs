@@ -46,38 +46,66 @@ namespace MotorNVS.MVC.Controllers
         // POST: RegistrationController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(RegistrationRequest registration)
+        public async Task<ActionResult> Create(RegistrationRequest registration)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _registrationService.CreateRegistration(registration);
+
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    return View();
+                }
+            }
+            return View();
+        }
+
+        // GET: RegistrationController/Edit/5
+        public async Task<ActionResult> Edit(int id)
         {
             try
             {
-                _registrationService.CreateRegistration(registration);
+                RegistrationResponse reg = await _registrationService.GetRegistrationById(id);
 
-                return RedirectToAction(nameof(Index));
+                return View(reg);
             }
             catch
             {
                 return RedirectToAction(nameof(Index));
             }
-        }
-
-        // GET: RegistrationController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
         }
 
         // POST: RegistrationController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, RegistrationRequest registration)
         {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    RegistrationResponse reg = await _registrationService.UpdateRegistration(id, registration);
+
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+
+                    return RedirectToAction(nameof(Index));
+                }
+            }
             try
             {
-                return RedirectToAction(nameof(Index));
+                RegistrationResponse errorReg = await _registrationService.GetRegistrationById(id);
+                return View(errorReg);
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
         }
 

@@ -69,6 +69,8 @@ namespace MotorNVS.DAL.Repositories
             if (fuelToUpdate != null)
             {
                 fuelToUpdate.FuelName = fuel.FuelName;
+
+                await _dBContext.SaveChangesAsync();
             }
 
             return fuelToUpdate;

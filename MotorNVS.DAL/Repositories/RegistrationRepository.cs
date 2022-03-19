@@ -80,9 +80,10 @@ namespace MotorNVS.DAL.Repositories
 
             if (registrationToUpdate != null)
             {
-                registrationToUpdate.RegistrationDate = registration.RegistrationDate;
                 registrationToUpdate.CustomerId = registration.CustomerId;
                 registrationToUpdate.VehicleId = registration.VehicleId;
+
+                await _dBContext.SaveChangesAsync();
             }
 
             return registrationToUpdate;

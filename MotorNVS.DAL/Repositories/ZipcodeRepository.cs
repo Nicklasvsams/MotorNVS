@@ -70,6 +70,8 @@ namespace MotorNVS.DAL.Repositories
             {
                 zipcodeToUpdate.ZipcodeNo = zipcode.ZipcodeNo;
                 zipcodeToUpdate.City = zipcode.City;
+
+                await _dBContext.SaveChangesAsync();
             }
 
             return zipcodeToUpdate;

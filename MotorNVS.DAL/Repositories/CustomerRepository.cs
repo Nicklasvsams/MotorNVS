@@ -75,6 +75,8 @@ namespace MotorNVS.DAL.Repositories
                 customerToUpdate.LastName = customer.LastName;
                 customerToUpdate.CreateDate = customer.CreateDate;
                 customerToUpdate.AddressId = customer.AddressId;
+
+                await _dBContext.SaveChangesAsync();
             }
 
             return customerToUpdate;

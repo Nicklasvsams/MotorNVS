@@ -69,6 +69,8 @@ namespace MotorNVS.DAL.Repositories
             if (categoryToUpdate != null)
             {
                 categoryToUpdate.CategoryName = category.CategoryName;
+
+                await _dBContext.SaveChangesAsync();
             }
 
             return categoryToUpdate;
