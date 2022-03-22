@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using MotorNVS.BL.Services;
 using MotorNVS.DAL.Database;
+using MotorNVS.DAL.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,27 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<MotorDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MotorDBContext")));
+
+builder.Services.AddScoped<IFuelRepository, FuelRepository>();
+builder.Services.AddScoped<IFuelService, FuelService>();
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
+builder.Services.AddScoped<IVehicleService, VehicleService>();
+
+builder.Services.AddScoped<IZipcodeRepository, ZipcodeRepository>();
+builder.Services.AddScoped<IZipcodeService, ZipcodeService>();
+
+builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+builder.Services.AddScoped<IAddressService, AddressService>();
+
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+
+builder.Services.AddScoped<IRegistrationRepository, RegistrationRepository>();
+builder.Services.AddScoped<IRegistrationService, RegistrationService>();
 
 var app = builder.Build();
 
