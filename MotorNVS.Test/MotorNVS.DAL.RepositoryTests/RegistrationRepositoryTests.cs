@@ -18,7 +18,7 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
         public RegistrationRepositoryTests()
         {
             _options = new DbContextOptionsBuilder<MotorDBContext>()
-                .UseInMemoryDatabase(databaseName: "MotorFuel")
+                .UseInMemoryDatabase(databaseName: "MotorRegistration")
                 .Options;
             _dBContext = new MotorDBContext(_options);
             _registrationRepository = new RegistrationRepository(_dBContext);

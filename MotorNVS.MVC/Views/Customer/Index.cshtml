@@ -1,0 +1,51 @@
+﻿@using MotorNVS.BL.DTOs.CustomerDTO
+@{
+    @model List<CustomerResponse>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @ViewBag.Message
+        </div>
+    }
+
+    <div class="createButton d-flex justify-content-around align-items-center">
+        <h1>Customers</h1>
+
+        <a href='@Url.Action("Create", "Customer")'>
+            <button>Create new entry</button>
+        </a>
+    </div>
+
+    @if (@Model.Count != 0)
+    {
+        <div class="container d-flex justify-content-around flex-row flex-wrap">
+            @foreach (CustomerResponse customer in @Model)
+            {
+                <div class="info-card">
+                    <div class="info-id d-flex justify-content-center">
+                        <p><b>Customer ID: @customer.Id</b></p>
+                        @Html.ActionLink("Delete", "Delete", new { id = customer.Id }, new {@class = "cardButton"})
+                        @Html.ActionLink("Edit", "Edit", new { id = customer.Id }, new {@class = "cardButton"})
+                    </div>
+                    <br />
+                    <p>First name: @customer.FirstName</p>
+                    <p>Last name: @customer.LastName</p>
+                    <p>Date created: @customer.CreateDate.ToShortDateString()</p>
+                    <br />
+                    <p><b>Address ID: @customer.AddressId</b></p>
+                    <p>Address: @customer.AddressResponse.StreetAndNo</p>
+                    <br />
+                    <p><b>Zipcode ID: @customer.AddressResponse.ZipcodeId</b></p>
+                    <p>Zipcode number: @customer.AddressResponse.ZipcodeResponse.ZipcodeNo</p>
+                    <p>City: @customer.AddressResponse.ZipcodeResponse.City</p>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>No data was found</p>
+
+    }
+}
