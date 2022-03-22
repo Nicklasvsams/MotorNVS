@@ -80,19 +80,25 @@ namespace MotorNVS.BL.Services
 
         private static AddressResponse MapAddressToAddressResponse(Address address)
         {
-            return new AddressResponse()
+            AddressResponse res =  new AddressResponse()
             {
                 Id = address.Id,
                 StreetAndNo = address.StreetAndNo,
                 CreateDate = address.CreateDate,
-                ZipcodeId = address.ZipCodeId,
-                ZipcodeResponse = new ZipcodeResponse()
+                ZipcodeId = address.ZipCodeId
+            };
+
+            if (address.Zipcode != null)
+            {
+                res.ZipcodeResponse = new ZipcodeResponse()
                 {
                     Id = address.Zipcode.Id,
                     ZipcodeNo = address.Zipcode.ZipcodeNo,
                     City = address.Zipcode.City
-                }
+                };
             };
+
+            return res;
         }
 
         private static Address MapAddressRequestToAddress(AddressRequest addressReq)
