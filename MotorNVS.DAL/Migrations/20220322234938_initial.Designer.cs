@@ -12,7 +12,7 @@ using MotorNVS.DAL.Database;
 namespace MotorNVS.DAL.Migrations
 {
     [DbContext(typeof(MotorDBContext))]
-    [Migration("20220316195626_initial")]
+    [Migration("20220322234938_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,14 +52,14 @@ namespace MotorNVS.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(176),
+                            CreateDate = new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(850),
                             StreetAndNo = "Bakkevej 18",
                             ZipCodeId = 2
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(252),
+                            CreateDate = new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(919),
                             StreetAndNo = "Pladehalebakke 15",
                             ZipCodeId = 1
                         });
@@ -127,7 +127,7 @@ namespace MotorNVS.DAL.Migrations
                         {
                             Id = 1,
                             AddressId = 2,
-                            CreateDate = new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(354),
+                            CreateDate = new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(1001),
                             FirstName = "Nicklas",
                             LastName = "Sams"
                         },
@@ -135,7 +135,7 @@ namespace MotorNVS.DAL.Migrations
                         {
                             Id = 2,
                             AddressId = 1,
-                            CreateDate = new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(374),
+                            CreateDate = new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(1017),
                             FirstName = "Henning",
                             LastName = "Bjarkesen"
                         });
@@ -229,14 +229,14 @@ namespace MotorNVS.DAL.Migrations
                         {
                             Id = 1,
                             CustomerId = 1,
-                            RegistrationDate = new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(712),
+                            RegistrationDate = new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(1289),
                             VehicleId = 2
                         },
                         new
                         {
                             Id = 2,
                             CustomerId = 2,
-                            RegistrationDate = new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(730),
+                            RegistrationDate = new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(1303),
                             VehicleId = 1
                         });
                 });
@@ -279,7 +279,7 @@ namespace MotorNVS.DAL.Migrations
                         {
                             Id = 1,
                             CategoryId = 2,
-                            CreateDate = new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(601),
+                            CreateDate = new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(1202),
                             FuelId = 1,
                             Make = "Suzuki",
                             Model = "Vitara"
@@ -288,7 +288,7 @@ namespace MotorNVS.DAL.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2022, 3, 16, 20, 56, 25, 244, DateTimeKind.Local).AddTicks(624),
+                            CreateDate = new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(1218),
                             FuelId = 2,
                             Make = "Volkswagen",
                             Model = "Beetle Turbo"
