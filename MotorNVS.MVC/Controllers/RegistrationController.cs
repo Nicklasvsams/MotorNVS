@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MotorNVS.BL.DTOs.RegistrationDTO;
 using MotorNVS.BL.Services;
-using MotorNVS.MVC.Models;
 
 namespace MotorNVS.MVC.Controllers
 {
@@ -19,6 +18,11 @@ namespace MotorNVS.MVC.Controllers
         {
             List<RegistrationResponse> registrations = new List<RegistrationResponse>();
 
+            if(TempData["shortMessage"] != null)
+            {
+                ViewBag.Message = TempData["shortMessage"];
+            };
+
             try
             {
                 registrations = await _registrationService.GetAllRegistrations();
@@ -28,13 +32,7 @@ namespace MotorNVS.MVC.Controllers
             catch
             {
                 return View(registrations);
-            }
-        }
-
-        // GET: RegistrationController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
+            };
         }
 
         // GET: RegistrationController/Create
@@ -54,13 +52,18 @@ namespace MotorNVS.MVC.Controllers
                 {
                     await _registrationService.CreateRegistration(registration);
 
+                    TempData["shortMessage"] = "Entry succesfully created!";
+
                     return RedirectToAction(nameof(Index));
                 }
                 catch
                 {
+                    ViewBag.Message = "An error occured, please try again.";
+
                     return View();
-                }
-            }
+                };
+            };
+
             return View();
         }
 
@@ -75,8 +78,10 @@ namespace MotorNVS.MVC.Controllers
             }
             catch
             {
+                TempData["shortMessage"] = "An error occured trying to fetch the entry, please try again.";
+
                 return RedirectToAction(nameof(Index));
-            }
+            };
         }
 
         // POST: RegistrationController/Edit/5
@@ -90,23 +95,30 @@ namespace MotorNVS.MVC.Controllers
                 {
                     RegistrationResponse reg = await _registrationService.UpdateRegistration(id, registration);
 
+                    TempData["shortMessage"] = "Entry has been succesfully updated!";
+
                     return RedirectToAction(nameof(Index));
                 }
                 catch
                 {
+                    TempData["shortMessage"] = "An error occured, please try again.";
 
                     return RedirectToAction(nameof(Index));
-                }
-            }
+                };
+            };
+
             try
             {
                 RegistrationResponse errorReg = await _registrationService.GetRegistrationById(id);
+
                 return View(errorReg);
             }
             catch
             {
+                TempData["shortMessage"] = "An error occured, please try again.";
+
                 return RedirectToAction(nameof(Index));
-            }
+            };
         }
 
         // GET: RegistrationController/Delete/5
@@ -116,12 +128,16 @@ namespace MotorNVS.MVC.Controllers
             {
                 await _registrationService.DeleteRegistrationById(id);
 
+                TempData["shortMessage"] = "Entry successfully deleted!";
+
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
+                TempData["shortMessage"] = "An error occured when trying to delete the entry, please try again.";
+
                 return RedirectToAction(nameof(Index));
-            }
+            };
         }
     }
 }
