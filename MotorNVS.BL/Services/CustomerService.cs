@@ -81,14 +81,18 @@ namespace MotorNVS.BL.Services
 
         private static CustomerResponse MapCustomerToCustomerResponse(Customer customer)
         {
-            return new CustomerResponse()
+            CustomerResponse res = new CustomerResponse()
             {
                 Id = customer.Id,
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
                 CreateDate = customer.CreateDate,
-                AddressId = customer.AddressId,
-                AddressResponse = new AddressResponse()
+                AddressId = customer.AddressId
+            };
+
+            if(customer.Address != null)
+            {
+                res.AddressResponse = new AddressResponse()
                 {
                     Id = customer.Address.Id,
                     StreetAndNo = customer.Address.StreetAndNo,
@@ -100,8 +104,10 @@ namespace MotorNVS.BL.Services
                         ZipcodeNo = customer.Address.Zipcode.ZipcodeNo,
                         City = customer.Address.Zipcode.City
                     }
-                }
+                };
             };
+
+            return res;
         }
 
         private static Customer MapCustomerRequestToCustomer(CustomerRequest customerReq)

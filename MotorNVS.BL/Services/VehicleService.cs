@@ -81,25 +81,32 @@ namespace MotorNVS.BL.Services
 
         private static VehicleResponse MapVehicleToVehicleResponse(Vehicle vehicle)
         {
-            return new VehicleResponse()
+            VehicleResponse res = new VehicleResponse()
             {
                 Id = vehicle.Id,
                 Make = vehicle.Make,
                 Model = vehicle.Model,
                 CreateDate = vehicle.CreateDate,
                 CategoryId = vehicle.CategoryId,
-                FuelId = vehicle.FuelId,
-                CategoryResponse = new CategoryResponse()
-                {
-                    Id = vehicle.Category.Id,
-                    CategoryName = vehicle.Category.CategoryName
-                },
-                FuelResponse = new FuelResponse()
+                FuelId = vehicle.FuelId
+            };
+
+            if(vehicle.Fuel != null && vehicle.Category != null)
+            {
+                res.FuelResponse = new FuelResponse()
                 {
                     Id = vehicle.Fuel.Id,
                     FuelName = vehicle.Fuel.FuelName
-                }
-            };
+                };
+
+                res.CategoryResponse = new CategoryResponse()
+                {
+                    Id = vehicle.Category.Id,
+                    CategoryName = vehicle.Category.CategoryName
+                };
+            }
+
+            return res;
         }
 
         private static Vehicle MapVehicleRequestToVehicle(VehicleRequest vehicleReq)

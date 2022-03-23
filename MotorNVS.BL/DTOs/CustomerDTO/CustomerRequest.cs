@@ -12,7 +12,7 @@ namespace MotorNVS.BL.DTOs.CustomerDTO
         [StringLength(50, ErrorMessage = "Last name can not be longer than 50 characters long")]
         public string? LastName { get; set; }
         [Required]
-        public DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; } = DateTime.Now;
         [Required]
         public int AddressId { get; set; }
     }

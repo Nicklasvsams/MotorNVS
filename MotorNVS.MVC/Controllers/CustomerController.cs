@@ -1,30 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MotorNVS.BL.DTOs.RegistrationDTO;
+using MotorNVS.BL.DTOs.CustomerDTO;
 using MotorNVS.BL.Services;
 
 namespace MotorNVS.MVC.Controllers
 {
-    public class RegistrationController : Controller
+    public class CustomerController : Controller
     {
-        private readonly IRegistrationService _registrationService;
+        private readonly ICustomerService _customerService;
 
-        public RegistrationController(IRegistrationService registrationService)
+        public CustomerController(ICustomerService customerService)
         {
-            _registrationService = registrationService;
+            _customerService = customerService;
         }
 
         public async Task<ActionResult> Index()
         {
-            List<RegistrationResponse> responses = new List<RegistrationResponse>();
+            List<CustomerResponse> responses = new List<CustomerResponse>();
 
-            if(TempData["shortMessage"] != null)
+            if (TempData["shortMessage"] != null)
             {
                 ViewBag.Message = TempData["shortMessage"];
             };
 
             try
             {
-                responses = await _registrationService.GetAllRegistrations();
+                responses = await _customerService.GetAllCustomers();
 
                 return View(responses);
             }
@@ -41,13 +41,13 @@ namespace MotorNVS.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(RegistrationRequest registration)
+        public async Task<ActionResult> Create(CustomerRequest req)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    await _registrationService.CreateRegistration(registration);
+                    await _customerService.CreateCustomer(req);
 
                     TempData["shortMessage"] = "Entry succesfully created!";
 
@@ -68,7 +68,7 @@ namespace MotorNVS.MVC.Controllers
         {
             try
             {
-                RegistrationResponse res = await _registrationService.GetRegistrationById(id);
+                CustomerResponse res = await _customerService.GetCustomerById(id);
 
                 return View(res);
             }
@@ -82,13 +82,13 @@ namespace MotorNVS.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, RegistrationRequest registration)
+        public async Task<ActionResult> Edit(int id, CustomerRequest req)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    await _registrationService.UpdateRegistration(id, registration);
+                    await _customerService.UpdateCustomer(id, req);
 
                     TempData["shortMessage"] = "Entry has been succesfully updated!";
 
@@ -104,7 +104,7 @@ namespace MotorNVS.MVC.Controllers
 
             try
             {
-                RegistrationResponse res = await _registrationService.GetRegistrationById(id);
+                CustomerResponse res = await _customerService.GetCustomerById(id);
 
                 return View(res);
             }
@@ -120,7 +120,7 @@ namespace MotorNVS.MVC.Controllers
         {
             try
             {
-                await _registrationService.DeleteRegistrationById(id);
+                await _customerService.DeleteCustomerById(id);
 
                 TempData["shortMessage"] = "Entry successfully deleted!";
 
