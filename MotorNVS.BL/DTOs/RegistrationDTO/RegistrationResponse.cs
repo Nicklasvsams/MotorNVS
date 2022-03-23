@@ -9,6 +9,7 @@ namespace MotorNVS.BL.DTOs.RegistrationDTO
         public DateTime RegistrationDate { get; set; }
         public int CustomerId { get; set; }
         public int VehicleId { get; set; }
+        public bool IsActive { get; set; }
 
         public CustomerResponse CustomerResponse { get; set; }
         public VehicleResponse VehicleResponse { get; set; }

@@ -13,6 +13,8 @@ namespace MotorNVS.DAL.Database.Entities
         public string LastName { get; set; }
         [Column(TypeName = "date")]
         public DateTime CreateDate { get; set; }
+        [Column(TypeName = "nvarchar(5)")]
+        public string IsActive { get; set; }
         [Column(TypeName = "int")]
         public int AddressId { get; set; }
 

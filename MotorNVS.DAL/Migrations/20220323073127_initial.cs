@@ -73,7 +73,8 @@ namespace MotorNVS.DAL.Migrations
                     Model = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "date", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    FuelId = table.Column<int>(type: "int", nullable: false)
+                    FuelId = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<string>(type: "nvarchar(5)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -122,6 +123,7 @@ namespace MotorNVS.DAL.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "date", nullable: false),
+                    IsActive = table.Column<string>(type: "nvarchar(5)", nullable: false),
                     AddressId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -143,7 +145,8 @@ namespace MotorNVS.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RegistrationDate = table.Column<DateTime>(type: "date", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
-                    VehicleId = table.Column<int>(type: "int", nullable: false)
+                    VehicleId = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<string>(type: "nvarchar(5)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -199,38 +202,38 @@ namespace MotorNVS.DAL.Migrations
                 columns: new[] { "Id", "CreateDate", "StreetAndNo", "ZipCodeId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(850), "Bakkevej 18", 2 },
-                    { 2, new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(919), "Pladehalebakke 15", 1 }
+                    { 1, new DateTime(2022, 3, 23, 8, 31, 26, 97, DateTimeKind.Local).AddTicks(2806), "Bakkevej 18", 2 },
+                    { 2, new DateTime(2022, 3, 23, 8, 31, 26, 97, DateTimeKind.Local).AddTicks(2874), "Pladehalebakke 15", 1 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Vehicle",
-                columns: new[] { "Id", "CategoryId", "CreateDate", "FuelId", "Make", "Model" },
+                columns: new[] { "Id", "CategoryId", "CreateDate", "FuelId", "IsActive", "Make", "Model" },
                 values: new object[,]
                 {
-                    { 1, 2, new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(1202), 1, "Suzuki", "Vitara" },
-                    { 2, 1, new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(1218), 2, "Volkswagen", "Beetle Turbo" }
+                    { 1, 2, new DateTime(2022, 3, 23, 8, 31, 26, 97, DateTimeKind.Local).AddTicks(3198), 1, "yes", "Suzuki", "Vitara" },
+                    { 2, 1, new DateTime(2022, 3, 23, 8, 31, 26, 97, DateTimeKind.Local).AddTicks(3216), 2, "yes", "Volkswagen", "Beetle Turbo" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Customer",
-                columns: new[] { "Id", "AddressId", "CreateDate", "FirstName", "LastName" },
-                values: new object[] { 1, 2, new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(1001), "Nicklas", "Sams" });
+                columns: new[] { "Id", "AddressId", "CreateDate", "FirstName", "IsActive", "LastName" },
+                values: new object[] { 1, 2, new DateTime(2022, 3, 23, 8, 31, 26, 97, DateTimeKind.Local).AddTicks(2970), "Nicklas", "yes", "Sams" });
 
             migrationBuilder.InsertData(
                 table: "Customer",
-                columns: new[] { "Id", "AddressId", "CreateDate", "FirstName", "LastName" },
-                values: new object[] { 2, 1, new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(1017), "Henning", "Bjarkesen" });
+                columns: new[] { "Id", "AddressId", "CreateDate", "FirstName", "IsActive", "LastName" },
+                values: new object[] { 2, 1, new DateTime(2022, 3, 23, 8, 31, 26, 97, DateTimeKind.Local).AddTicks(2986), "Henning", "yes", "Bjarkesen" });
 
             migrationBuilder.InsertData(
                 table: "Registration",
-                columns: new[] { "Id", "CustomerId", "RegistrationDate", "VehicleId" },
-                values: new object[] { 1, 1, new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(1289), 2 });
+                columns: new[] { "Id", "CustomerId", "IsActive", "RegistrationDate", "VehicleId" },
+                values: new object[] { 1, 1, "yes", new DateTime(2022, 3, 23, 8, 31, 26, 97, DateTimeKind.Local).AddTicks(3292), 2 });
 
             migrationBuilder.InsertData(
                 table: "Registration",
-                columns: new[] { "Id", "CustomerId", "RegistrationDate", "VehicleId" },
-                values: new object[] { 2, 2, new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(1303), 1 });
+                columns: new[] { "Id", "CustomerId", "IsActive", "RegistrationDate", "VehicleId" },
+                values: new object[] { 2, 2, "yes", new DateTime(2022, 3, 23, 8, 31, 26, 97, DateTimeKind.Local).AddTicks(3308), 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Address_ZipCodeId",

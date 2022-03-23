@@ -17,6 +17,8 @@ namespace MotorNVS.DAL.Database.Entities
         public int CategoryId { get; set; }
         [Column(TypeName = "int")]
         public int FuelId { get; set; }
+        [Column(TypeName = "nvarchar(5)")]
+        public string IsActive { get; set; }
 
         public Category Category { get; set; }
         public Fuel Fuel { get; set; }

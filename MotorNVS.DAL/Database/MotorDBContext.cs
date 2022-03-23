@@ -57,7 +57,8 @@ namespace MotorNVS.DAL.Database
                     FirstName = "Nicklas",
                     LastName = "Sams",
                     CreateDate = DateTime.Now,
-                    AddressId = 2
+                    AddressId = 2,
+                    IsActive = "yes"
                 },
                 new Customer()
                 {
@@ -65,7 +66,8 @@ namespace MotorNVS.DAL.Database
                     FirstName = "Henning",
                     LastName = "Bjarkesen",
                     CreateDate = DateTime.Now,
-                    AddressId = 1
+                    AddressId = 1,
+                    IsActive = "yes"
                 });
 
             modelBuilder.Entity<Fuel>().HasData(
@@ -100,7 +102,8 @@ namespace MotorNVS.DAL.Database
                     Model = "Vitara",
                     CategoryId = 2,
                     FuelId = 1,
-                    CreateDate = DateTime.Now
+                    CreateDate = DateTime.Now,
+                    IsActive = "yes"
                 },
                 new Vehicle()
                 {
@@ -109,7 +112,8 @@ namespace MotorNVS.DAL.Database
                     Model = "Beetle Turbo",
                     CategoryId = 1,
                     FuelId = 2,
-                    CreateDate = DateTime.Now
+                    CreateDate = DateTime.Now,
+                    IsActive = "yes"
                 });
 
             modelBuilder.Entity<Registration>().HasData(
@@ -118,14 +122,16 @@ namespace MotorNVS.DAL.Database
                     Id = 1,
                     CustomerId = 1,
                     VehicleId = 2,
-                    RegistrationDate = DateTime.Now
+                    RegistrationDate = DateTime.Now,
+                    IsActive = "yes"
                 },
                 new Registration()
                 {
                     Id = 2,
                     CustomerId = 2,
                     VehicleId = 1,
-                    RegistrationDate = DateTime.Now
+                    RegistrationDate = DateTime.Now,
+                    IsActive = "yes"
                 });
 
             modelBuilder.Entity<Login>().HasData(

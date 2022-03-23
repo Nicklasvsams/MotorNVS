@@ -12,6 +12,7 @@ namespace MotorNVS.BL.DTOs.VehicleDTO
         public string Model { get; set; }
         [Required]
         public DateTime CreateDate { get; set; } = DateTime.Now;
+        public bool IsActive { get; set; } = true;
         [Required]
         public int CategoryId { get; set; }
         [Required]

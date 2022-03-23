@@ -50,14 +50,14 @@ namespace MotorNVS.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(850),
+                            CreateDate = new DateTime(2022, 3, 23, 8, 31, 26, 97, DateTimeKind.Local).AddTicks(2806),
                             StreetAndNo = "Bakkevej 18",
                             ZipCodeId = 2
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(919),
+                            CreateDate = new DateTime(2022, 3, 23, 8, 31, 26, 97, DateTimeKind.Local).AddTicks(2874),
                             StreetAndNo = "Pladehalebakke 15",
                             ZipCodeId = 1
                         });
@@ -110,6 +110,10 @@ namespace MotorNVS.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("IsActive")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(5)");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
@@ -125,16 +129,18 @@ namespace MotorNVS.DAL.Migrations
                         {
                             Id = 1,
                             AddressId = 2,
-                            CreateDate = new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(1001),
+                            CreateDate = new DateTime(2022, 3, 23, 8, 31, 26, 97, DateTimeKind.Local).AddTicks(2970),
                             FirstName = "Nicklas",
+                            IsActive = "yes",
                             LastName = "Sams"
                         },
                         new
                         {
                             Id = 2,
                             AddressId = 1,
-                            CreateDate = new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(1017),
+                            CreateDate = new DateTime(2022, 3, 23, 8, 31, 26, 97, DateTimeKind.Local).AddTicks(2986),
                             FirstName = "Henning",
+                            IsActive = "yes",
                             LastName = "Bjarkesen"
                         });
                 });
@@ -208,6 +214,10 @@ namespace MotorNVS.DAL.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
+                    b.Property<string>("IsActive")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(5)");
+
                     b.Property<DateTime>("RegistrationDate")
                         .HasColumnType("date");
 
@@ -227,14 +237,16 @@ namespace MotorNVS.DAL.Migrations
                         {
                             Id = 1,
                             CustomerId = 1,
-                            RegistrationDate = new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(1289),
+                            IsActive = "yes",
+                            RegistrationDate = new DateTime(2022, 3, 23, 8, 31, 26, 97, DateTimeKind.Local).AddTicks(3292),
                             VehicleId = 2
                         },
                         new
                         {
                             Id = 2,
                             CustomerId = 2,
-                            RegistrationDate = new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(1303),
+                            IsActive = "yes",
+                            RegistrationDate = new DateTime(2022, 3, 23, 8, 31, 26, 97, DateTimeKind.Local).AddTicks(3308),
                             VehicleId = 1
                         });
                 });
@@ -255,6 +267,10 @@ namespace MotorNVS.DAL.Migrations
 
                     b.Property<int>("FuelId")
                         .HasColumnType("int");
+
+                    b.Property<string>("IsActive")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(5)");
 
                     b.Property<string>("Make")
                         .IsRequired()
@@ -277,8 +293,9 @@ namespace MotorNVS.DAL.Migrations
                         {
                             Id = 1,
                             CategoryId = 2,
-                            CreateDate = new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(1202),
+                            CreateDate = new DateTime(2022, 3, 23, 8, 31, 26, 97, DateTimeKind.Local).AddTicks(3198),
                             FuelId = 1,
+                            IsActive = "yes",
                             Make = "Suzuki",
                             Model = "Vitara"
                         },
@@ -286,8 +303,9 @@ namespace MotorNVS.DAL.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2022, 3, 23, 0, 49, 37, 652, DateTimeKind.Local).AddTicks(1218),
+                            CreateDate = new DateTime(2022, 3, 23, 8, 31, 26, 97, DateTimeKind.Local).AddTicks(3216),
                             FuelId = 2,
+                            IsActive = "yes",
                             Make = "Volkswagen",
                             Model = "Beetle Turbo"
                         });

@@ -11,6 +11,7 @@ namespace MotorNVS.DAL.Repositories
         Task<Customer> InsertNewCustomer(Customer customer);
         Task<Customer> DeleteCustomerById(int customerId);
         Task<Customer> UpdateCustomerById(int customerId, Customer customer);
+        Task<Customer> UpdateCustomerActivation(int customerId);
     }
 
     public class CustomerRepository : ICustomerRepository
@@ -61,6 +62,29 @@ namespace MotorNVS.DAL.Repositories
                 .Include(x => x.Address)
                 .Include(x => x.Address.Zipcode)
                 .FirstOrDefaultAsync(x => x.Id == customerId);
+        }
+
+        public async Task<Customer> UpdateCustomerActivation(int customerId)
+        {
+            Customer customerActivation = await _dBContext
+                .Customer
+                .FirstOrDefaultAsync(x => x.Id == customerId);
+
+            if (customerActivation != null)
+            {
+                if (customerActivation.IsActive == "yes")
+                {
+                    customerActivation.IsActive = "no";
+                }
+                else
+                {
+                    customerActivation.IsActive = "yes";
+                }
+
+                await _dBContext.SaveChangesAsync();
+            }
+
+            return customerActivation;
         }
 
         public async Task<Customer> UpdateCustomerById(int customerId, Customer customer)

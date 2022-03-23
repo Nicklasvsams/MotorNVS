@@ -8,6 +8,7 @@ namespace MotorNVS.BL.DTOs.CustomerDTO
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime CreateDate { get; set; }
+        public bool IsActive { get; set; }
         public int AddressId { get; set; }
 
         public AddressResponse AddressResponse { get; set; }
