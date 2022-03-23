@@ -116,19 +116,19 @@ namespace MotorNVS.MVC.Controllers
             };
         }
 
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Deactivate(int id)
         {
             try
             {
-                await _customerService.DeleteCustomerById(id);
+                await _customerService.CustomerActivation(id);
 
-                TempData["shortMessage"] = "Entry successfully deleted!";
+                TempData["shortMessage"] = "Status succesfully changed!";
 
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                TempData["shortMessage"] = "An error occured when trying to delete the entry, please try again.";
+                TempData["shortMessage"] = "An error occured when trying to change the status of the entry, please try again.";
 
                 return RedirectToAction(nameof(Index));
             };

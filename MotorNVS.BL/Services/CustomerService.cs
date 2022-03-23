@@ -13,6 +13,7 @@ namespace MotorNVS.BL.Services
         Task<CustomerResponse> DeleteCustomerById(int customerId);
         Task<CustomerResponse> CreateCustomer(CustomerRequest newCustomer);
         Task<CustomerResponse> UpdateCustomer(int customerId, CustomerRequest customerUpdate);
+        Task<CustomerResponse> CustomerActivation(int customerId);
     }
 
     public class CustomerService : ICustomerService
@@ -79,6 +80,18 @@ namespace MotorNVS.BL.Services
             return null;
         }
 
+        public async Task<CustomerResponse> CustomerActivation(int customerId)
+        {
+            Customer customerActivation = await _customerRepository.UpdateCustomerActivation(customerId);
+
+            if (customerActivation != null)
+            {
+                return MapCustomerToCustomerResponse(customerActivation);
+            }
+
+            return null;
+        }
+
         private static CustomerResponse MapCustomerToCustomerResponse(Customer customer)
         {
             CustomerResponse res = new CustomerResponse()
@@ -87,10 +100,11 @@ namespace MotorNVS.BL.Services
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
                 CreateDate = customer.CreateDate,
-                AddressId = customer.AddressId
+                AddressId = customer.AddressId,
+                IsActive = customer.IsActive == "yes" ? true : false
             };
 
-            if(customer.Address != null)
+            if (customer.Address != null)
             {
                 res.AddressResponse = new AddressResponse()
                 {
@@ -117,7 +131,8 @@ namespace MotorNVS.BL.Services
                 FirstName = customerReq.FirstName,
                 LastName = customerReq.LastName,
                 CreateDate = customerReq.CreateDate,
-                AddressId = customerReq.AddressId
+                AddressId = customerReq.AddressId,
+                IsActive = customerReq.IsActive ? "yes" : "no"
             };
         }
     }

@@ -25,7 +25,7 @@
                 <div class="info-card">
                     <div class="info-id d-flex justify-content-center">
                         <p><b>Customer ID: @customer.Id</b></p>
-                        @Html.ActionLink("Delete", "Delete", new { id = customer.Id }, new {@class = "cardButton"})
+                        @Html.ActionLink("Change activation status", "Deactivate", new { id = customer.Id }, new {@class = "cardButton"})
                         @Html.ActionLink("Edit", "Edit", new { id = customer.Id }, new {@class = "cardButton"})
                     </div>
                     <br />
@@ -39,6 +39,16 @@
                     <p><b>Zipcode ID: @customer.AddressResponse.ZipcodeId</b></p>
                     <p>Zipcode number: @customer.AddressResponse.ZipcodeResponse.ZipcodeNo</p>
                     <p>City: @customer.AddressResponse.ZipcodeResponse.City</p>
+                    <br />
+                    
+                    @if (customer.IsActive)
+                    {
+                        <p><b>Account status: Active</b></p>
+                    }
+                    else
+                    {
+                        <p><b>Account status: Deactivated</b></p>
+                    }
                 </div>
             }
         </div>
