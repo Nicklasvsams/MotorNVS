@@ -44,7 +44,7 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
         }
 
         [Fact]
-        public async void GetAllFuels_ReturnsEmptyList_WhenFuelsDoNotExist()
+        public async void GetAllRegistration_ReturnsEmptyList_WhenRegistrationsDoNotExist()
         {
             // Arrange
             await _dBContext.Database.EnsureDeletedAsync();
@@ -96,7 +96,7 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
         //}
 
         [Fact]
-        public async void DeleteFuelById_ReturnsFuel_WhenFuelToDeleteExists()
+        public async void DeleteRegistrationById_ReturnsRegistration_WhenRegistrationToDeleteExists()
         {
             // Arrange
             int registrationId = 1;
@@ -238,6 +238,7 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
                 RegistrationDate = DateTime.Now,
                 CustomerId = 1,
                 VehicleId = 1,
+                IsActive = "yes",
                 Customer = new Customer()
                 {
                     Id = 1,
@@ -245,6 +246,7 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
                     FirstName = "Test",
                     LastName = "Test",
                     AddressId = 1,
+                    IsActive = "yes",
                     Address = new Address()
                     {
                         Id = 1,
@@ -267,6 +269,7 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
                     Model = "Test",
                     CategoryId = 1,
                     FuelId = 1,
+                    IsActive = "yes",
                     Fuel = new Fuel()
                     {
                         Id = 1,
@@ -285,6 +288,7 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
                 RegistrationDate = DateTime.Now,
                 CustomerId = 2,
                 VehicleId = 2,
+                IsActive = "yes",
                 Customer = new Customer()
                 {
                     Id = 2,
@@ -292,6 +296,7 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
                     FirstName = "Test2",
                     LastName = "Test2",
                     AddressId = 2,
+                    IsActive = "yes",
                     Address = new Address()
                     {
                         Id = 2,
@@ -314,6 +319,7 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
                     Model = "Test",
                     CategoryId = 2,
                     FuelId = 2,
+                    IsActive = "yes",
                     Fuel = new Fuel()
                     {
                         Id = 2,
@@ -337,6 +343,7 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
                 RegistrationDate = DateTime.Now,
                 CustomerId = 1,
                 VehicleId = 1,
+                IsActive = "yes",
                 Customer = new Customer()
                 {
                     Id = 2,
@@ -344,6 +351,7 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
                     FirstName = "Test",
                     LastName = "Test",
                     AddressId = 2,
+                    IsActive = "yes",
                     Address = new Address()
                     {
                         Id = 1,
@@ -366,6 +374,7 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
                     Model = "Test",
                     CategoryId = 1,
                     FuelId = 1,
+                    IsActive = "yes",
                     Fuel = new Fuel()
                     {
                         Id = 1,
