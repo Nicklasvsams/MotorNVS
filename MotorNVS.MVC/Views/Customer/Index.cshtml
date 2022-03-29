@@ -25,7 +25,7 @@
                 <div class="info-card">
                     <div class="info-id d-flex justify-content-center">
                         <p><b>Customer ID: @customer.Id</b></p>
-                        @Html.ActionLink("Change activation status", "Deactivate", new { id = customer.Id }, new {@class = "cardButton"})
+                        @Html.ActionLink("Change activation status", "Activation", new { id = customer.Id }, new {@class = "cardButton"})
                         @Html.ActionLink("Edit", "Edit", new { id = customer.Id }, new {@class = "cardButton"})
                     </div>
                     <br />
