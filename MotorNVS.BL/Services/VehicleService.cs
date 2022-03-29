@@ -13,6 +13,7 @@ namespace MotorNVS.BL.Services
         Task<VehicleResponse> DeleteVehicleById(int vehicleId);
         Task<VehicleResponse> CreateVehicle(VehicleRequest newVehicle);
         Task<VehicleResponse> UpdateVehicle(int vehicleId, VehicleRequest vehicleUpdate);
+        Task<VehicleResponse> VehicleActivation(int vehicleId);
     }
 
     public class VehicleService : IVehicleService
@@ -79,6 +80,11 @@ namespace MotorNVS.BL.Services
             return null;
         }
 
+        public Task<VehicleResponse> VehicleActivation(int vehicleId)
+        {
+            throw new NotImplementedException();
+        }
+
         private static VehicleResponse MapVehicleToVehicleResponse(Vehicle vehicle)
         {
             VehicleResponse res = new VehicleResponse()
@@ -88,7 +94,8 @@ namespace MotorNVS.BL.Services
                 Model = vehicle.Model,
                 CreateDate = vehicle.CreateDate,
                 CategoryId = vehicle.CategoryId,
-                FuelId = vehicle.FuelId
+                FuelId = vehicle.FuelId,
+                IsActive = vehicle.IsActive == "yes" ? true : false
             };
 
             if(vehicle.Fuel != null && vehicle.Category != null)
@@ -117,7 +124,8 @@ namespace MotorNVS.BL.Services
                 Model = vehicleReq.Model,
                 CreateDate = vehicleReq.CreateDate,
                 CategoryId = vehicleReq.CategoryId,
-                FuelId = vehicleReq.FuelId
+                FuelId = vehicleReq.FuelId,
+                IsActive = vehicleReq.IsActive ? "yes" : "no"
             };
         }
     }

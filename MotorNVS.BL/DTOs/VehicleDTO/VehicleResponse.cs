@@ -14,6 +14,7 @@ namespace MotorNVS.BL.DTOs.VehicleDTO
         public int CategoryId { get; set; }
         [Display(Name = "Fuel ID")]
         public int FuelId { get; set; }
+        public bool IsActive { get; set; }
 
         public CategoryResponse CategoryResponse { get; set; }
         public FuelResponse FuelResponse { get; set; }
