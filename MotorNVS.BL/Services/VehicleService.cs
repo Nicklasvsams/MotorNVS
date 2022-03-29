@@ -9,7 +9,7 @@ namespace MotorNVS.BL.Services
     public interface IVehicleService
     {
         Task<List<VehicleResponse>> GetAllVehicles();
-        Task<VehicleResponse> GeVehicleById(int vehicleId);
+        Task<VehicleResponse> GetVehicleById(int vehicleId);
         Task<VehicleResponse> DeleteVehicleById(int vehicleId);
         Task<VehicleResponse> CreateVehicle(VehicleRequest newVehicle);
         Task<VehicleResponse> UpdateVehicle(int vehicleId, VehicleRequest vehicleUpdate);
@@ -56,7 +56,7 @@ namespace MotorNVS.BL.Services
             return vehicleList.Select(x => MapVehicleToVehicleResponse(x)).ToList();
         }
 
-        public async Task<VehicleResponse> GeVehicleById(int vehicleId)
+        public async Task<VehicleResponse> GetVehicleById(int vehicleId)
         {
             Vehicle vehicle = await _vehicleRepository.SelectVehicleById(vehicleId);
 
