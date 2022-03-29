@@ -6,6 +6,7 @@ namespace MotorNVS.BL.DTOs.CategoryDTO
     {
         [Required]
         [StringLength(50, ErrorMessage = "Fuel name can not be longer than 50 characters long")]
+        [Display(Name = "Category name")]
         public string CategoryName { get; set; }
     }
 }
