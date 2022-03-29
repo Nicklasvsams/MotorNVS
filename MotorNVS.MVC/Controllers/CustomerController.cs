@@ -116,7 +116,7 @@ namespace MotorNVS.MVC.Controllers
             };
         }
 
-        public async Task<ActionResult> Deactivate(int id)
+        public async Task<ActionResult> Activation(int id)
         {
             try
             {
