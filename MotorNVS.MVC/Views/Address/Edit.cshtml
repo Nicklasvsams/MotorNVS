@@ -1,5 +1,52 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using MotorNVS.BL.DTOs.AddressDTO
+
 @{
+    @model AddressResponse
+
+    @if (Model != null)
+    {
+        <div>Edit address ID: @Model.Id</div>
+
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @ViewBag.Message
+            </div>
+        }
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.StreetAndNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.StreetAndNo, new { htmlAttributes = new { @class = "form-control", @Value = Model.StreetAndNo } })
+                        @Html.ValidationMessageFor(model => model.StreetAndNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ZipcodeId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ZipcodeId, new { htmlAttributes = new { @class = "form-control", @Value = Model.ZipcodeId } })
+                        @Html.ValidationMessageFor(model => model.ZipcodeId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Edit" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 }
