@@ -19,13 +19,17 @@
 
     @if (@Model.Count != 0)
     {
-        <div class="container d-flex justify-content-around flex-row flex-wrap">
+        <div class="d-flex justify-content-around flex-row flex-wrap">
             @foreach (AddressResponse address in @Model)
             {
-                <div class="info-card">
-                    <div class="info-id d-flex justify-content-center">
-                        <p><b>Address ID: @address.Id</b></p>
-                        @Html.ActionLink("Edit", "Edit", new { id = address.Id }, new {@class = "cardButton"})
+                <div class="container info-card">
+                    <div class="row info-id align-items-center justify-content-around">
+                        <div class="col-auto">
+                            <p><b>Address ID: @address.Id</b></p>
+                        </div>
+                        <div class="col-auto">
+                            @Html.ActionLink("Edit", "Edit", new { id = address.Id }, new {@class = "cardButton"})
+                        </div>
                     </div>
                     <br />
                     <p>Address: @address.StreetAndNo</p>
