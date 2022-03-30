@@ -80,9 +80,16 @@ namespace MotorNVS.BL.Services
             return null;
         }
 
-        public Task<VehicleResponse> VehicleActivation(int vehicleId)
+        public async Task<VehicleResponse> VehicleActivation(int vehicleId)
         {
-            throw new NotImplementedException();
+            Vehicle vehicleActivation = await _vehicleRepository.UpdateVehicleActivation(vehicleId);
+
+            if (vehicleActivation != null)
+            {
+                return MapVehicleToVehicleResponse(vehicleActivation);
+            }
+
+            return null;
         }
 
         private static VehicleResponse MapVehicleToVehicleResponse(Vehicle vehicle)

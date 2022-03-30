@@ -122,16 +122,14 @@ namespace MotorNVS.DAL.Database
                     Id = 1,
                     CustomerId = 1,
                     VehicleId = 2,
-                    RegistrationDate = DateTime.Now,
-                    IsActive = "yes"
+                    RegistrationDate = DateTime.Now
                 },
                 new Registration()
                 {
                     Id = 2,
                     CustomerId = 2,
                     VehicleId = 1,
-                    RegistrationDate = DateTime.Now,
-                    IsActive = "yes"
+                    RegistrationDate = DateTime.Now
                 });
 
             modelBuilder.Entity<Login>().HasData(

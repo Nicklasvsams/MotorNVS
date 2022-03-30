@@ -22,34 +22,60 @@
         <div class="container d-flex justify-content-around flex-row flex-wrap">
             @foreach (CustomerResponse customer in @Model)
             {
-                <div class="info-card">
-                    <div class="info-id d-flex justify-content-center">
-                        <p><b>Customer ID: @customer.Id</b></p>
-                        @Html.ActionLink("Change activation status", "Activation", new { id = customer.Id }, new {@class = "cardButton"})
-                        @Html.ActionLink("Edit", "Edit", new { id = customer.Id }, new {@class = "cardButton"})
-                    </div>
-                    <br />
-                    <p>First name: @customer.FirstName</p>
-                    <p>Last name: @customer.LastName</p>
-                    <p>Date created: @customer.CreateDate.ToShortDateString()</p>
-                    <br />
-                    <p><b>Address ID: @customer.AddressId</b></p>
-                    <p>Address: @customer.AddressResponse.StreetAndNo</p>
-                    <br />
-                    <p><b>Zipcode ID: @customer.AddressResponse.ZipcodeId</b></p>
-                    <p>Zipcode number: @customer.AddressResponse.ZipcodeResponse.ZipcodeNo</p>
-                    <p>City: @customer.AddressResponse.ZipcodeResponse.City</p>
-                    <br />
-                    
-                    @if (customer.IsActive)
-                    {
+                @if (customer.IsActive)
+                {
+                    <div class="info-card">
+                        <div class="info-id d-flex justify-content-center">
+                            <p><b>Customer ID: @customer.Id</b></p>
+                            @Html.ActionLink("Change activation status", "Activation", new { id = customer.Id }, new {@class = "cardButton"})
+                            @Html.ActionLink("Edit", "Edit", new { id = customer.Id }, new {@class = "cardButton"})
+                        </div>
+                        <br />
+                        <p>First name: @customer.FirstName</p>
+                        <p>Last name: @customer.LastName</p>
+                        <p>Date created: @customer.CreateDate.ToShortDateString()</p>
+                        <br />
+                        <p><b>Address ID: @customer.AddressId</b></p>
+                        <p>Address: @customer.AddressResponse.StreetAndNo</p>
+                        <br />
+                        <p><b>Zipcode ID: @customer.AddressResponse.ZipcodeId</b></p>
+                        <p>Zipcode number: @customer.AddressResponse.ZipcodeResponse.ZipcodeNo</p>
+                        <p>City: @customer.AddressResponse.ZipcodeResponse.City</p>
+                        <br />
                         <p><b>Account status: Active</b></p>
-                    }
-                    else
-                    {
-                        <p><b>Account status: Deactivated</b></p>
-                    }
-                </div>
+                    </div>
+                }
+            }
+        </div>
+
+        <hr />
+
+        <div class="container d-flex justify-content-around flex-row flex-wrap">
+            @foreach (CustomerResponse customer in @Model)
+            {
+                @if (!customer.IsActive)
+                {
+                    <div class="info-card">
+                        <div class="info-id d-flex justify-content-center">
+                            <p><b>Customer ID: @customer.Id</b></p>
+                            @Html.ActionLink("Change activation status", "Activation", new { id = customer.Id }, new {@class = "cardButton"})
+                            @Html.ActionLink("Edit", "Edit", new { id = customer.Id }, new {@class = "cardButton"})
+                        </div>
+                        <br />
+                        <p>First name: @customer.FirstName</p>
+                        <p>Last name: @customer.LastName</p>
+                        <p>Date created: @customer.CreateDate.ToShortDateString()</p>
+                        <br />
+                        <p><b>Address ID: @customer.AddressId</b></p>
+                        <p>Address: @customer.AddressResponse.StreetAndNo</p>
+                        <br />
+                        <p><b>Zipcode ID: @customer.AddressResponse.ZipcodeId</b></p>
+                        <p>Zipcode number: @customer.AddressResponse.ZipcodeResponse.ZipcodeNo</p>
+                        <p>City: @customer.AddressResponse.ZipcodeResponse.City</p>
+                        <br />
+                        <p><b>Account status: Active</b></p>
+                    </div>
+                }
             }
         </div>
     }

@@ -12,7 +12,6 @@ namespace MotorNVS.BL.DTOs.RegistrationDTO
         public int CustomerId { get; set; }
         [Display(Name = "Vehicle ID")]
         public int VehicleId { get; set; }
-        public bool IsActive { get; set; }
 
         public CustomerResponse CustomerResponse { get; set; }
         public VehicleResponse VehicleResponse { get; set; }
