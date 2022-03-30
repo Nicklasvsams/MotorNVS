@@ -1,0 +1,63 @@
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Nicklas
+-- Create date: 
+-- Description:	
+-- =============================================
+CREATE PROCEDURE GetAllRegistrationsWithSpecificVehicleId 
+	-- Add the parameters for the stored procedure here
+	@VehicleId int = 0
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT 
+	Registration.Id as rid, 
+	Registration.RegistrationDate, 
+	Customer.Id as cusid,
+	Customer.FirstName,
+	Customer.LastName,
+	Customer.CreateDate,
+	Customer.IsActive,
+	Address.Id as aid,
+	Address.StreetAndNo,
+	Address.CreateDate,
+	Zipcode.Id as zid,
+	Zipcode.City,
+	Zipcode.ZipcodeNo,
+	Vehicle.Id as vid,
+	Vehicle.Make,
+	Vehicle.Model,
+	Vehicle.CreateDate,
+	Vehicle.IsActive,
+	Category.Id as catid,
+	Category.CategoryName,
+	Fuel.Id as fid,
+	Fuel.FuelName
+	from Registration
+	inner join Customer ON Registration.CustomerId=Customer.Id
+	inner join Address ON Customer.AddressId=Address.Id
+	inner join Zipcode ON Address.ZipCodeId=Zipcode.Id
+	inner join Vehicle ON Registration.VehicleId=Vehicle.Id
+	inner join Category ON Vehicle.CategoryId=Category.Id
+	inner join Fuel ON Vehicle.FuelId=Fuel.Id
+	where Registration.VehicleId = @VehicleId
+END
+GO
