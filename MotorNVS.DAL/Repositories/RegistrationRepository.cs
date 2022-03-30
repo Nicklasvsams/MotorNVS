@@ -135,28 +135,6 @@ namespace MotorNVS.DAL.Repositories
                 await _dBConnect.conn.CloseAsync();
 
                 return regList;
-                //public Customer retrieveProc(Customer obj)
-                //{
-                //    string query = "usp_readCustomerById";
-                //    //usp_readCustomerById
-                //    Customer customer = new Customer();
-                //    using (SqlConnection connection = new SqlConnection(connectionString))
-                //    {
-                //        //SqlCommand cmd = new SqlCommand("vores storedprocedures navn", connection);
-                //        SqlCommand cmd = new SqlCommand(query, connection);
-                //        cmd.CommandType = CommandType.StoredProcedure;
-                //        //cmd.Parameters.AddWithValue("sqlscript", c# parameter );
-                //        cmd.Parameters.AddWithValue("@customerId", obj.customerId);
-
-                //        // talk to our server
-                //        connection.Open();
-                //        SqlDataReader reader = cmd.ExecuteReader();
-                //        reader.Read();
-                //        customer.firstname = reader["firstname"].ToString();
-                //        customer.lastname = reader["lastname"].ToString();
-                //    }
-                //    return customer;
-                //}
             }
         }
 
