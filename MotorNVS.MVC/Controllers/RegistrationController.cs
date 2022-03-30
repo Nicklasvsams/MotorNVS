@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MotorNVS.BL.DTOs.RegistrationDTO;
 using MotorNVS.BL.Services;
+using MotorNVS.MVC.Models;
 
 namespace MotorNVS.MVC.Controllers
 {
@@ -17,7 +18,7 @@ namespace MotorNVS.MVC.Controllers
         {
             if(HttpContext.Session.GetString("user") != null)
             {
-                List<RegistrationResponse> responses = new List<RegistrationResponse>();
+                RegistrationIndexViewModel resModel = new RegistrationIndexViewModel();
 
                 if (TempData["shortMessage"] != null)
                 {
@@ -26,13 +27,13 @@ namespace MotorNVS.MVC.Controllers
 
                 try
                 {
-                    responses = await _registrationService.GetAllRegistrations();
+                    resModel.RegList = await _registrationService.GetAllRegistrations();
 
-                    return View(responses);
+                    return View(resModel);
                 }
                 catch
                 {
-                    return View(responses);
+                    return View(resModel);
                 };
             }
 
@@ -146,6 +147,32 @@ namespace MotorNVS.MVC.Controllers
                 catch
                 {
                     TempData["shortMessage"] = "An error occured when trying to delete the entry, please try again.";
+
+                    return RedirectToAction(nameof(Index));
+                };
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Index(RegistrationIndexViewModel regModelForID)
+        {
+            RegistrationIndexViewModel regModel = new RegistrationIndexViewModel();
+
+            if (HttpContext.Session.GetString("user") != null)
+            {
+                try
+                {
+                    List<RegistrationResponse> resList = await _registrationService.GetAllRegistrationsByVehicleId(regModelForID.SearchInt);
+                    regModel.RegList = resList;
+
+                    return View(regModel);
+                }
+                catch
+                {
+                    TempData["shortMessage"] = "An error occured trying to fetch the entries, please try again.";
 
                     return RedirectToAction(nameof(Index));
                 };
