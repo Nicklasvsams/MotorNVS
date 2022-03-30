@@ -45,11 +45,17 @@
         <div class="container d-flex justify-content-around flex-row flex-wrap">
             @foreach (RegistrationResponse registration in @Model.RegList)
             {
-                <div class="info-card">
-                    <div class="info-id d-flex justify-content-center">
-                        <p><b>Registration ID: @registration.Id</b></p>
-                        @Html.ActionLink("Delete", "Delete", new { id = registration.Id }, new {@class = "cardButton"})
-                        @Html.ActionLink("Edit", "Edit", new { id = registration.Id }, new {@class = "cardButton"})
+                <div class="container info-card">
+                    <div class="row info-id  align-items-center justify-content-around">
+                        <div class="col-auto">
+                            <p><b>Registration ID: @registration.Id</b></p>
+                        </div>
+                        <div class="col-auto">
+                            @Html.ActionLink("Delete", "Delete", new { id = registration.Id }, new {@class = "cardButton"})
+                        </div>
+                        <div class="col-auto">
+                            @Html.ActionLink("Edit", "Edit", new { id = registration.Id }, new {@class = "cardButton"})
+                        </div>
                     </div>
                     <br />
                     <p>Registration date: @registration.RegistrationDate.ToShortDateString()</p>

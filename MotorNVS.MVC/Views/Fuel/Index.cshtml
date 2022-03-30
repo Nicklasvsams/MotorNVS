@@ -19,13 +19,17 @@
 
     @if (@Model.Count != 0)
     {
-        <div class="container d-flex justify-content-around flex-row flex-wrap">
+        <div class="d-flex justify-content-around flex-row flex-wrap">
             @foreach (FuelResponse fuel in @Model)
             {
-                <div class="info-card">
-                    <div class="info-id d-flex justify-content-center">
-                        <p><b>Fuel ID: @fuel.Id</b></p>
-                        @Html.ActionLink("Edit", "Edit", new { id = fuel.Id }, new {@class = "cardButton"})
+                <div class="container info-card">
+                    <div class="row info-id  align-items-center justify-content-around">
+                        <div class="col-auto">
+                            <p><b>Fuel ID: @fuel.Id</b></p>
+                        </div>
+                        <div class="col-auto">
+                            @Html.ActionLink("Edit", "Edit", new { id = fuel.Id }, new {@class = "cardButton"})
+                        </div>
                     </div>
                     <br />
                     <p>Fuel name: @fuel.FuelName</p>

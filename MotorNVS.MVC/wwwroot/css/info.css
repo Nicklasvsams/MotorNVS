@@ -22,18 +22,23 @@
 }
 
 .info-id {
-    position: absolute;
     background-color: black;
     color: white;
-    margin: 0;
-    padding: 0;
-    border-radius: 0px, 0px, 5px, 5px;
 }
 
 .cardButton{
-    margin-left:1vw;
-    margin-right: 1vw;
     cursor: pointer;
     text-decoration: none;
     color:white;
+    border: solid 1px;
+    border-radius: 5px;
+    padding: 0 5px;
+}
+
+.cardButton:hover{
+    color: lightslategrey;
+}
+
+.col-auto{
+    margin:5px;
 }

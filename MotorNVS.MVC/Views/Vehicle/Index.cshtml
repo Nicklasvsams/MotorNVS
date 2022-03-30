@@ -19,16 +19,22 @@
 
     @if (@Model.Count != 0)
     {
-        <div class="container d-flex justify-content-around flex-row flex-wrap">
+        <div class="d-flex justify-content-around flex-row flex-wrap">
             @foreach (VehicleResponse vehicle in @Model)
             {
                 @if (vehicle.IsActive)
                 {
-                    <div class="info-card">
-                        <div class="info-id d-flex justify-content-center">
-                            <p><b>Vehicle ID: @vehicle.Id</b></p>
-                            @Html.ActionLink("Change activation status", "Activation", new { id = vehicle.Id }, new {@class = "cardButton"})
-                            @Html.ActionLink("Edit", "Edit", new { id = vehicle.Id }, new {@class = "cardButton"})
+                    <div class="container info-card">
+                        <div class="row info-id  align-items-center justify-content-around">
+                            <div class="col-auto">
+                                <p><b>Vehicle ID: @vehicle.Id</b></p>
+                            </div>
+                            <div class="col-auto">
+                                @Html.ActionLink("Change activation status", "Activation", new { id = vehicle.Id }, new {@class = "cardButton"})
+                            </div>
+                            <div class="col-auto">
+                                @Html.ActionLink("Edit", "Edit", new { id = vehicle.Id }, new {@class = "cardButton"})
+                            </div>
                         </div>
                         <br />
                         <p>Make: @vehicle.Make</p>
@@ -54,11 +60,17 @@
             {
                 @if (!vehicle.IsActive)
                 {
-                    <div class="info-card">
-                        <div class="info-id d-flex justify-content-center">
-                            <p><b>Vehicle ID: @vehicle.Id</b></p>
-                            @Html.ActionLink("Change activation status", "Activation", new { id = vehicle.Id }, new {@class = "cardButton"})
-                            @Html.ActionLink("Edit", "Edit", new { id = vehicle.Id }, new {@class = "cardButton"})
+                    <div class="container info-card">
+                        <div class="row info-id  align-items-center justify-content-around">
+                            <div class="col-auto">
+                                <p><b>Vehicle ID: @vehicle.Id</b></p>
+                            </div>
+                            <div class="col-auto">
+                                @Html.ActionLink("Change activation status", "Activation", new { id = vehicle.Id }, new {@class = "cardButton"})
+                            </div>
+                            <div class="col-auto">
+                                @Html.ActionLink("Edit", "Edit", new { id = vehicle.Id }, new {@class = "cardButton"})
+                            </div>
                         </div>
                         <br />
                         <p>Make: @vehicle.Make</p>
