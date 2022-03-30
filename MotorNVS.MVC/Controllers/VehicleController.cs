@@ -1,21 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MotorNVS.BL.DTOs.CustomerDTO;
+using MotorNVS.BL.DTOs.VehicleDTO;
 using MotorNVS.BL.Services;
 
 namespace MotorNVS.MVC.Controllers
 {
-    public class CustomerController : Controller
+    public class VehicleController : Controller
     {
-        private readonly ICustomerService _customerService;
+        private readonly IVehicleService _vehicleService;
 
-        public CustomerController(ICustomerService customerService)
+        public VehicleController(IVehicleService vehicleService)
         {
-            _customerService = customerService;
+            _vehicleService = vehicleService;
         }
 
         public async Task<ActionResult> Index()
         {
-            List<CustomerResponse> responses = new List<CustomerResponse>();
+            List<VehicleResponse> responses = new List<VehicleResponse>();
 
             if (TempData["shortMessage"] != null)
             {
@@ -24,7 +24,7 @@ namespace MotorNVS.MVC.Controllers
 
             try
             {
-                responses = await _customerService.GetAllCustomers();
+                responses = await _vehicleService.GetAllVehicles();
 
                 return View(responses);
             }
@@ -41,13 +41,13 @@ namespace MotorNVS.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(CustomerRequest req)
+        public async Task<ActionResult> Create(VehicleRequest req)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    await _customerService.CreateCustomer(req);
+                    await _vehicleService.CreateVehicle(req);
 
                     TempData["shortMessage"] = "Entry succesfully created!";
 
@@ -68,7 +68,7 @@ namespace MotorNVS.MVC.Controllers
         {
             try
             {
-                CustomerResponse res = await _customerService.GetCustomerById(id);
+                VehicleResponse res = await _vehicleService.GetVehicleById(id);
 
                 return View(res);
             }
@@ -82,13 +82,13 @@ namespace MotorNVS.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, CustomerRequest req)
+        public async Task<ActionResult> Edit(int id, VehicleRequest req)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    await _customerService.UpdateCustomer(id, req);
+                    await _vehicleService.UpdateVehicle(id, req);
 
                     TempData["shortMessage"] = "Entry has been succesfully updated!";
 
@@ -104,7 +104,7 @@ namespace MotorNVS.MVC.Controllers
 
             try
             {
-                CustomerResponse res = await _customerService.GetCustomerById(id);
+                VehicleResponse res = await _vehicleService.GetVehicleById(id);
 
                 return View(res);
             }
@@ -120,7 +120,7 @@ namespace MotorNVS.MVC.Controllers
         {
             try
             {
-                await _customerService.CustomerActivation(id);
+                await _vehicleService.VehicleActivation(id);
 
                 TempData["shortMessage"] = "Status succesfully changed!";
 

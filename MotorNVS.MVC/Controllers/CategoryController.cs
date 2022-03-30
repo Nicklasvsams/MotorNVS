@@ -1,21 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MotorNVS.BL.DTOs.CustomerDTO;
+using MotorNVS.BL.DTOs.CategoryDTO;
 using MotorNVS.BL.Services;
 
 namespace MotorNVS.MVC.Controllers
 {
-    public class CustomerController : Controller
+    public class CategoryController : Controller
     {
-        private readonly ICustomerService _customerService;
+        private readonly ICategoryService _categoryService;
 
-        public CustomerController(ICustomerService customerService)
+        public CategoryController(ICategoryService categoryService)
         {
-            _customerService = customerService;
+            _categoryService = categoryService;
         }
 
         public async Task<ActionResult> Index()
         {
-            List<CustomerResponse> responses = new List<CustomerResponse>();
+            List<CategoryResponse> responses = new List<CategoryResponse>();
 
             if (TempData["shortMessage"] != null)
             {
@@ -24,7 +24,7 @@ namespace MotorNVS.MVC.Controllers
 
             try
             {
-                responses = await _customerService.GetAllCustomers();
+                responses = await _categoryService.GetAllCategories();
 
                 return View(responses);
             }
@@ -41,13 +41,13 @@ namespace MotorNVS.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(CustomerRequest req)
+        public async Task<ActionResult> Create(CategoryRequest req)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    await _customerService.CreateCustomer(req);
+                    await _categoryService.CreateCategory(req);
 
                     TempData["shortMessage"] = "Entry succesfully created!";
 
@@ -68,7 +68,7 @@ namespace MotorNVS.MVC.Controllers
         {
             try
             {
-                CustomerResponse res = await _customerService.GetCustomerById(id);
+                CategoryResponse res = await _categoryService.GetCategoryById(id);
 
                 return View(res);
             }
@@ -82,13 +82,13 @@ namespace MotorNVS.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, CustomerRequest req)
+        public async Task<ActionResult> Edit(int id, CategoryRequest req)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    await _customerService.UpdateCustomer(id, req);
+                    await _categoryService.UpdateCategory(id, req);
 
                     TempData["shortMessage"] = "Entry has been succesfully updated!";
 
@@ -104,31 +104,13 @@ namespace MotorNVS.MVC.Controllers
 
             try
             {
-                CustomerResponse res = await _customerService.GetCustomerById(id);
+                CategoryResponse res = await _categoryService.GetCategoryById(id);
 
                 return View(res);
             }
             catch
             {
                 TempData["shortMessage"] = "An error occured, please try again.";
-
-                return RedirectToAction(nameof(Index));
-            };
-        }
-
-        public async Task<ActionResult> Activation(int id)
-        {
-            try
-            {
-                await _customerService.CustomerActivation(id);
-
-                TempData["shortMessage"] = "Status succesfully changed!";
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                TempData["shortMessage"] = "An error occured when trying to change the status of the entry, please try again.";
 
                 return RedirectToAction(nameof(Index));
             };

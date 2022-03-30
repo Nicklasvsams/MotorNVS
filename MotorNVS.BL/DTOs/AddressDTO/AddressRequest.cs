@@ -6,9 +6,11 @@ namespace MotorNVS.BL.DTOs.AddressDTO
     {
         [Required]
         [StringLength(100, ErrorMessage = "Street address can not be longer than 100 characters long")]
+        [Display(Name = "Street name and number")]
         public string StreetAndNo { get; set; }
         [Required]
         public DateTime CreateDate { get; set; } = DateTime.Now;
+        [Display(Name = "Zipcode ID")]
         [Required]
         public int ZipcodeId { get; set; }
     }

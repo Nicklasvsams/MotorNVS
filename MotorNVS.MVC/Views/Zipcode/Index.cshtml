@@ -1,5 +1,43 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using MotorNVS.BL.DTOs.ZipcodeDTO
 @{
+    @model List<ZipcodeResponse>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @ViewBag.Message
+        </div>
+    }
+
+    <div class="createButton d-flex justify-content-around align-items-center">
+        <h1>Zipcodes</h1>
+
+        <a href='@Url.Action("Create", "Zipcode")'>
+            <button>Create new entry</button>
+        </a>
+    </div>
+
+    @if (@Model.Count != 0)
+    {
+        <div class="container d-flex justify-content-around flex-row flex-wrap">
+            @foreach (ZipcodeResponse zipcode in @Model)
+            {
+                <div class="info-card">
+                    <div class="info-id d-flex justify-content-center">
+                        <p><b>Zipcode ID: @zipcode.Id</b></p>
+                        @Html.ActionLink("Edit", "Edit", new { id = zipcode.Id }, new {@class = "cardButton"})
+                    </div>
+                    <br />
+                    <p>Zipcode number: @zipcode.ZipcodeNo</p>
+                    <p>City: @zipcode.City</p>
+                    <br />
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>No data was found</p>
+
+    }
 }

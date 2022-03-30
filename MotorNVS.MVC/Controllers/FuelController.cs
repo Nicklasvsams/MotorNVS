@@ -1,21 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MotorNVS.BL.DTOs.CustomerDTO;
+using MotorNVS.BL.DTOs.FuelDTO;
 using MotorNVS.BL.Services;
 
 namespace MotorNVS.MVC.Controllers
 {
-    public class CustomerController : Controller
+    public class FuelController : Controller
     {
-        private readonly ICustomerService _customerService;
+        private readonly IFuelService _fuelService;
 
-        public CustomerController(ICustomerService customerService)
+        public FuelController(IFuelService fuelService)
         {
-            _customerService = customerService;
+            _fuelService = fuelService;
         }
 
         public async Task<ActionResult> Index()
         {
-            List<CustomerResponse> responses = new List<CustomerResponse>();
+            List<FuelResponse> responses = new List<FuelResponse>();
 
             if (TempData["shortMessage"] != null)
             {
@@ -24,7 +24,7 @@ namespace MotorNVS.MVC.Controllers
 
             try
             {
-                responses = await _customerService.GetAllCustomers();
+                responses = await _fuelService.GetAllFuels();
 
                 return View(responses);
             }
@@ -41,13 +41,13 @@ namespace MotorNVS.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(CustomerRequest req)
+        public async Task<ActionResult> Create(FuelRequest req)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    await _customerService.CreateCustomer(req);
+                    await _fuelService.CreateFuel(req);
 
                     TempData["shortMessage"] = "Entry succesfully created!";
 
@@ -68,7 +68,7 @@ namespace MotorNVS.MVC.Controllers
         {
             try
             {
-                CustomerResponse res = await _customerService.GetCustomerById(id);
+                FuelResponse res = await _fuelService.GetFuelById(id);
 
                 return View(res);
             }
@@ -82,13 +82,13 @@ namespace MotorNVS.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, CustomerRequest req)
+        public async Task<ActionResult> Edit(int id, FuelRequest req)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    await _customerService.UpdateCustomer(id, req);
+                    await _fuelService.UpdateFuel(id, req);
 
                     TempData["shortMessage"] = "Entry has been succesfully updated!";
 
@@ -104,31 +104,13 @@ namespace MotorNVS.MVC.Controllers
 
             try
             {
-                CustomerResponse res = await _customerService.GetCustomerById(id);
+                FuelResponse res = await _fuelService.GetFuelById(id);
 
                 return View(res);
             }
             catch
             {
                 TempData["shortMessage"] = "An error occured, please try again.";
-
-                return RedirectToAction(nameof(Index));
-            };
-        }
-
-        public async Task<ActionResult> Activation(int id)
-        {
-            try
-            {
-                await _customerService.CustomerActivation(id);
-
-                TempData["shortMessage"] = "Status succesfully changed!";
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                TempData["shortMessage"] = "An error occured when trying to change the status of the entry, please try again.";
 
                 return RedirectToAction(nameof(Index));
             };

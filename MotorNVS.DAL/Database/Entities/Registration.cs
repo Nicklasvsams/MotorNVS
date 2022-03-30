@@ -13,8 +13,6 @@ namespace MotorNVS.DAL.Database.Entities
         public int CustomerId { get; set; }
         [Column(TypeName = "int")]
         public int VehicleId { get; set; }
-        [Column(TypeName = "nvarchar(5)")]
-        public string IsActive { get; set; }
 
         public Customer Customer { get; set; }
         public Vehicle Vehicle { get; set; }

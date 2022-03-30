@@ -7,7 +7,7 @@ namespace MotorNVS.BL.Services
     public interface IZipcodeService
     {
         Task<List<ZipcodeResponse>> GetAllZipcodes();
-        Task<ZipcodeResponse> GeZipcodeById(int zipcodeId);
+        Task<ZipcodeResponse> GetZipcodeById(int zipcodeId);
         Task<ZipcodeResponse> DeleteZipcodeById(int zipcodeId);
         Task<ZipcodeResponse> CreateZipcode(ZipcodeRequest newZipcode);
         Task<ZipcodeResponse> UpdateZipcode(int zipcodeId, ZipcodeRequest zipcodeUpdate);
@@ -53,7 +53,7 @@ namespace MotorNVS.BL.Services
             return zipcodeList.Select(x => MapZipcodeToZipcodeResponse(x)).ToList();
         }
 
-        public async Task<ZipcodeResponse> GeZipcodeById(int zipcodeId)
+        public async Task<ZipcodeResponse> GetZipcodeById(int zipcodeId)
         {
             Zipcode zipcode = await _zipcodeRepository.SelectZipcodeById(zipcodeId);
 

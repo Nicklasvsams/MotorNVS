@@ -11,6 +11,7 @@ namespace MotorNVS.DAL.Repositories
         Task<Vehicle> InsertNewVehicle(Vehicle vehicle);
         Task<Vehicle> DeleteVehicleById(int vehicleId);
         Task<Vehicle> UpdateVehicleById(int vehicleId, Vehicle vehicle);
+        Task<Vehicle> UpdateVehicleActivation(int vehicleId);
     }
 
     public class VehicleRepository : IVehicleRepository
@@ -62,6 +63,29 @@ namespace MotorNVS.DAL.Repositories
                 .Include("Category")
                 .Include("Fuel")
                 .FirstOrDefaultAsync(x => x.Id == vehicleId);
+        }
+
+        public async Task<Vehicle> UpdateVehicleActivation(int vehicleId)
+        {
+            Vehicle vehicleActivation = await _dBContext
+                .Vehicle
+                .FirstOrDefaultAsync(x => x.Id == vehicleId);
+
+            if (vehicleActivation != null)
+            {
+                if (vehicleActivation.IsActive == "yes")
+                {
+                    vehicleActivation.IsActive = "no";
+                }
+                else
+                {
+                    vehicleActivation.IsActive = "yes";
+                }
+
+                await _dBContext.SaveChangesAsync();
+            }
+
+            return vehicleActivation;
         }
 
         public async Task<Vehicle> UpdateVehicleById(int vehicleId, Vehicle vehicle)
