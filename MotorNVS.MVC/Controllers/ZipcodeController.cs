@@ -15,28 +15,39 @@ namespace MotorNVS.MVC.Controllers
 
         public async Task<ActionResult> Index()
         {
-            List<ZipcodeResponse> responses = new List<ZipcodeResponse>();
-
-            if (TempData["shortMessage"] != null)
+            if (HttpContext.Session.GetString("user") != null)
             {
-                ViewBag.Message = TempData["shortMessage"];
-            };
+                List<ZipcodeResponse> responses = new List<ZipcodeResponse>();
 
-            try
-            {
-                responses = await _zipcodeService.GetAllZipcodes();
+                if (TempData["shortMessage"] != null)
+                {
+                    ViewBag.Message = TempData["shortMessage"];
+                };
 
-                return View(responses);
+                try
+                {
+                    responses = await _zipcodeService.GetAllZipcodes();
+
+                    return View(responses);
+                }
+                catch
+                {
+                    return View(responses);
+                };
             }
-            catch
-            {
-                return View(responses);
-            };
+
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Create()
         {
-            return View();
+            if (HttpContext.Session.GetString("user") != null)
+            {
+                return View();
+
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -66,18 +77,23 @@ namespace MotorNVS.MVC.Controllers
 
         public async Task<ActionResult> Edit(int id)
         {
-            try
+            if (HttpContext.Session.GetString("user") != null)
             {
-                ZipcodeResponse res = await _zipcodeService.GetZipcodeById(id);
+                try
+                {
+                    ZipcodeResponse res = await _zipcodeService.GetZipcodeById(id);
 
-                return View(res);
+                    return View(res);
+                }
+                catch
+                {
+                    TempData["shortMessage"] = "An error occured trying to fetch the entry, please try again.";
+
+                    return RedirectToAction(nameof(Index));
+                };
             }
-            catch
-            {
-                TempData["shortMessage"] = "An error occured trying to fetch the entry, please try again.";
 
-                return RedirectToAction(nameof(Index));
-            };
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]

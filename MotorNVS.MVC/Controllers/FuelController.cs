@@ -15,28 +15,38 @@ namespace MotorNVS.MVC.Controllers
 
         public async Task<ActionResult> Index()
         {
-            List<FuelResponse> responses = new List<FuelResponse>();
-
-            if (TempData["shortMessage"] != null)
+            if (HttpContext.Session.GetString("user") != null)
             {
-                ViewBag.Message = TempData["shortMessage"];
-            };
+                List<FuelResponse> responses = new List<FuelResponse>();
 
-            try
-            {
-                responses = await _fuelService.GetAllFuels();
+                if (TempData["shortMessage"] != null)
+                {
+                    ViewBag.Message = TempData["shortMessage"];
+                };
 
-                return View(responses);
+                try
+                {
+                    responses = await _fuelService.GetAllFuels();
+
+                    return View(responses);
+                }
+                catch
+                {
+                    return View(responses);
+                };
             }
-            catch
-            {
-                return View(responses);
-            };
+
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Create()
         {
-            return View();
+            if (HttpContext.Session.GetString("user") != null)
+            {
+                return View();
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -66,18 +76,23 @@ namespace MotorNVS.MVC.Controllers
 
         public async Task<ActionResult> Edit(int id)
         {
-            try
+            if (HttpContext.Session.GetString("user") != null)
             {
-                FuelResponse res = await _fuelService.GetFuelById(id);
+                try
+                {
+                    FuelResponse res = await _fuelService.GetFuelById(id);
 
-                return View(res);
+                    return View(res);
+                }
+                catch
+                {
+                    TempData["shortMessage"] = "An error occured trying to fetch the entry, please try again.";
+
+                    return RedirectToAction(nameof(Index));
+                };
             }
-            catch
-            {
-                TempData["shortMessage"] = "An error occured trying to fetch the entry, please try again.";
 
-                return RedirectToAction(nameof(Index));
-            };
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]

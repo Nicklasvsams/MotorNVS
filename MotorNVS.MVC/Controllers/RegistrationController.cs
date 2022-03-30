@@ -15,28 +15,38 @@ namespace MotorNVS.MVC.Controllers
 
         public async Task<ActionResult> Index()
         {
-            List<RegistrationResponse> responses = new List<RegistrationResponse>();
-
-            if(TempData["shortMessage"] != null)
+            if(HttpContext.Session.GetString("user") != null)
             {
-                ViewBag.Message = TempData["shortMessage"];
-            };
+                List<RegistrationResponse> responses = new List<RegistrationResponse>();
 
-            try
-            {
-                responses = await _registrationService.GetAllRegistrations();
+                if (TempData["shortMessage"] != null)
+                {
+                    ViewBag.Message = TempData["shortMessage"];
+                };
 
-                return View(responses);
+                try
+                {
+                    responses = await _registrationService.GetAllRegistrations();
+
+                    return View(responses);
+                }
+                catch
+                {
+                    return View(responses);
+                };
             }
-            catch
-            {
-                return View(responses);
-            };
+
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Create()
         {
-            return View();
+            if (HttpContext.Session.GetString("user") != null)
+            {
+                return View();
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -66,18 +76,23 @@ namespace MotorNVS.MVC.Controllers
 
         public async Task<ActionResult> Edit(int id)
         {
-            try
+            if (HttpContext.Session.GetString("user") != null)
             {
-                RegistrationResponse res = await _registrationService.GetRegistrationById(id);
+                try
+                {
+                    RegistrationResponse res = await _registrationService.GetRegistrationById(id);
 
-                return View(res);
+                    return View(res);
+                }
+                catch
+                {
+                    TempData["shortMessage"] = "An error occured trying to fetch the entry, please try again.";
+
+                    return RedirectToAction(nameof(Index));
+                };
             }
-            catch
-            {
-                TempData["shortMessage"] = "An error occured trying to fetch the entry, please try again.";
 
-                return RedirectToAction(nameof(Index));
-            };
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -118,20 +133,25 @@ namespace MotorNVS.MVC.Controllers
 
         public async Task<ActionResult> Delete(int id)
         {
-            try
+            if (HttpContext.Session.GetString("user") != null)
             {
-                await _registrationService.DeleteRegistrationById(id);
+                try
+                {
+                    await _registrationService.DeleteRegistrationById(id);
 
-                TempData["shortMessage"] = "Entry successfully deleted!";
+                    TempData["shortMessage"] = "Entry successfully deleted!";
 
-                return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    TempData["shortMessage"] = "An error occured when trying to delete the entry, please try again.";
+
+                    return RedirectToAction(nameof(Index));
+                };
             }
-            catch
-            {
-                TempData["shortMessage"] = "An error occured when trying to delete the entry, please try again.";
 
-                return RedirectToAction(nameof(Index));
-            };
+            return RedirectToAction("Index", "Home");
         }
     }
 }
