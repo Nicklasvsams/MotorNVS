@@ -15,28 +15,38 @@ namespace MotorNVS.MVC.Controllers
 
         public async Task<ActionResult> Index()
         {
-            List<CustomerResponse> responses = new List<CustomerResponse>();
-
-            if (TempData["shortMessage"] != null)
+            if (HttpContext.Session.GetString("user") != null)
             {
-                ViewBag.Message = TempData["shortMessage"];
-            };
+                List<CustomerResponse> responses = new List<CustomerResponse>();
 
-            try
-            {
-                responses = await _customerService.GetAllCustomers();
+                if (TempData["shortMessage"] != null)
+                {
+                    ViewBag.Message = TempData["shortMessage"];
+                };
 
-                return View(responses);
+                try
+                {
+                    responses = await _customerService.GetAllCustomers();
+
+                    return View(responses);
+                }
+                catch
+                {
+                    return View(responses);
+                };
             }
-            catch
-            {
-                return View(responses);
-            };
+
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Create()
         {
-            return View();
+            if (HttpContext.Session.GetString("user") != null)
+            {
+                return View();
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -66,18 +76,23 @@ namespace MotorNVS.MVC.Controllers
 
         public async Task<ActionResult> Edit(int id)
         {
-            try
+            if (HttpContext.Session.GetString("user") != null)
             {
-                CustomerResponse res = await _customerService.GetCustomerById(id);
+                try
+                {
+                    CustomerResponse res = await _customerService.GetCustomerById(id);
 
-                return View(res);
+                    return View(res);
+                }
+                catch
+                {
+                    TempData["shortMessage"] = "An error occured trying to fetch the entry, please try again.";
+
+                    return RedirectToAction(nameof(Index));
+                };
             }
-            catch
-            {
-                TempData["shortMessage"] = "An error occured trying to fetch the entry, please try again.";
 
-                return RedirectToAction(nameof(Index));
-            };
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -118,20 +133,25 @@ namespace MotorNVS.MVC.Controllers
 
         public async Task<ActionResult> Activation(int id)
         {
-            try
+            if (HttpContext.Session.GetString("user") != null)
             {
-                await _customerService.CustomerActivation(id);
+                try
+                {
+                    await _customerService.CustomerActivation(id);
 
-                TempData["shortMessage"] = "Status succesfully changed!";
+                    TempData["shortMessage"] = "Status succesfully changed!";
 
-                return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    TempData["shortMessage"] = "An error occured when trying to change the status of the entry, please try again.";
+
+                    return RedirectToAction(nameof(Index));
+                };
             }
-            catch
-            {
-                TempData["shortMessage"] = "An error occured when trying to change the status of the entry, please try again.";
 
-                return RedirectToAction(nameof(Index));
-            };
+            return RedirectToAction("Index", "Home");
         }
     }
 }

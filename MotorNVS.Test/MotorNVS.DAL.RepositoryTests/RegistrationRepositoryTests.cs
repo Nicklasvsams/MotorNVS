@@ -238,7 +238,6 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
                 RegistrationDate = DateTime.Now,
                 CustomerId = 1,
                 VehicleId = 1,
-                IsActive = "yes",
                 Customer = new Customer()
                 {
                     Id = 1,
@@ -288,7 +287,6 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
                 RegistrationDate = DateTime.Now,
                 CustomerId = 2,
                 VehicleId = 2,
-                IsActive = "yes",
                 Customer = new Customer()
                 {
                     Id = 2,
@@ -343,7 +341,6 @@ namespace MotorNVS.Test.MotorNVS.DAL.RepositoryTests
                 RegistrationDate = DateTime.Now,
                 CustomerId = 1,
                 VehicleId = 1,
-                IsActive = "yes",
                 Customer = new Customer()
                 {
                     Id = 2,
