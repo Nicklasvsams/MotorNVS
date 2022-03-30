@@ -1,6 +1,6 @@
 ﻿@using MotorNVS.BL.DTOs.RegistrationDTO
 @{
-    @model List<RegistrationResponse>
+    @model RegistrationIndexViewModel
 
     @if (ViewBag.Message != null)
     {
@@ -17,10 +17,33 @@
         </a>
     </div>
 
-    @if (@Model.Count != 0)
+    @if (@Model.RegList.Count != 0)
     {
-        <div class="d-flex justify-content-around flex-row flex-wrap">
-            @foreach (RegistrationResponse registration in @Model)
+        @using (Html.BeginForm("Index", "Registration"))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SearchInt , htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SearchInt, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SearchInt, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Find" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="container d-flex justify-content-around flex-row flex-wrap">
+            @foreach (RegistrationResponse registration in @Model.RegList)
             {
                 <div class="container info-card">
                     <div class="row info-id  align-items-center justify-content-around">

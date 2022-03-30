@@ -22,6 +22,8 @@ builder.Services.AddDbContext<MotorDBContext>(options => options.UseSqlServer(bu
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 
+builder.Services.AddScoped<DBConnect, DBConnect>();
+
 builder.Services.AddScoped<IFuelRepository, FuelRepository>();
 builder.Services.AddScoped<IFuelService, FuelService>();
 

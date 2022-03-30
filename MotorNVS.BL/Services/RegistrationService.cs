@@ -12,6 +12,7 @@ namespace MotorNVS.BL.Services
     public interface IRegistrationService
     {
         Task<List<RegistrationResponse>> GetAllRegistrations();
+        Task<List<RegistrationResponse>> GetAllRegistrationsByVehicleId(int vehicleId);
         Task<RegistrationResponse> GetRegistrationById(int registrationId);
         Task<RegistrationResponse> DeleteRegistrationById(int registrationId);
         Task<RegistrationResponse> CreateRegistration(RegistrationRequest newRegistration);
@@ -54,6 +55,13 @@ namespace MotorNVS.BL.Services
         public async Task<List<RegistrationResponse>> GetAllRegistrations()
         {
             List<Registration> registrationList = await _registrationRepository.SelectAllRegistrations();
+
+            return registrationList.Select(x => MapRegistrationToRegistrationResponse(x)).ToList();
+        }
+
+        public async Task<List<RegistrationResponse>> GetAllRegistrationsByVehicleId(int vehicleId)
+        {
+            List<Registration> registrationList = await _registrationRepository.SelectAllRegistrationsByVehicleId(vehicleId);
 
             return registrationList.Select(x => MapRegistrationToRegistrationResponse(x)).ToList();
         }
