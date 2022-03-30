@@ -14,7 +14,6 @@ namespace MotorNVS.DAL.Repositories
         Task<Registration> InsertNewRegistration(Registration registration);
         Task<Registration> DeleteRegistrationById(int registrationId);
         Task<Registration> UpdateRegistrationById(int registrationId, Registration registration);
-
     }
 
     public class RegistrationRepository : IRegistrationRepository
@@ -82,58 +81,55 @@ namespace MotorNVS.DAL.Repositories
 
                 while (reader.Read())
                 {
-                    for (int i = 0; i < readCount; i++)
+                    regList.Add(new Registration()
                     {
-                        regList.Add(new Registration() 
-                        { 
-                            Id = (int)reader["rid"], 
-                            RegistrationDate = (DateTime)reader["RegistrationDate"], 
-                            CustomerId = (int)reader["CustomerId"], 
-                            VehicleId = (int)reader["VehicleId"],
-                            Customer = new Customer()
+                        Id = (int)reader["rid"],
+                        RegistrationDate = (DateTime)reader["RegistrationDate"],
+                        CustomerId = (int)reader["cusid"],
+                        VehicleId = (int)reader["vid"],
+                        Customer = new Customer()
+                        {
+                            Id = (int)reader["cusid"],
+                            FirstName = reader["FirstName"].ToString(),
+                            LastName = reader["LastName"].ToString(),
+                            CreateDate = (DateTime)reader["CreateDate"],
+                            IsActive = reader["IsActive"].ToString(),
+                            AddressId = (int)reader["aid"],
+                            Address = new Address()
                             {
-                                Id = (int)reader["cusid"],
-                                FirstName = reader["FirstName"].ToString(),
-                                LastName = reader["LastName"].ToString(),
+                                Id = (int)reader["aid"],
+                                StreetAndNo = reader["StreetAndNo"].ToString(),
                                 CreateDate = (DateTime)reader["CreateDate"],
-                                IsActive = reader["IsActive"].ToString(),
-                                AddressId = (int)reader["AddressId"],
-                                Address = new Address()
+                                ZipCodeId = (int)reader["zid"],
+                                Zipcode = new Zipcode()
                                 {
                                     Id = (int)reader["aid"],
-                                    StreetAndNo = reader["StreetAndNo"].ToString(),
-                                    CreateDate = (DateTime)reader["CreateDate"],
-                                    ZipCodeId = (int)reader["ZipcodeId"],
-                                    Zipcode = new Zipcode()
-                                    {
-                                        Id = (int)reader["aid"],
-                                        ZipcodeNo = reader["ZipcodeNo"].ToString(),
-                                        City = reader["City"].ToString()
-                                    }
-                                }
-                            },
-                            Vehicle = new Vehicle()
-                            {
-                                Id = (int)reader["vid"],
-                                Make = reader["Make"].ToString(),
-                                Model = reader["Model"].ToString(),
-                                CreateDate = (DateTime)reader["CreateDate"],
-                                IsActive = reader["IsActive"].ToString(),
-                                CategoryId = (int)reader["CategoryId"],
-                                FuelId = (int)reader["FuelId"],
-                                Category = new Category()
-                                {
-                                    Id = (int)reader["catid"],
-                                    CategoryName = reader["CategoryName"].ToString()
-                                },
-                                Fuel = new Fuel()
-                                {
-                                    Id = (int)reader["fid"],
-                                    FuelName = reader["FuelName"].ToString()
+                                    ZipcodeNo = reader["ZipcodeNo"].ToString(),
+                                    City = reader["City"].ToString()
                                 }
                             }
-                        });
-                    }
+                        },
+                        Vehicle = new Vehicle()
+                        {
+                            Id = (int)reader["vid"],
+                            Make = reader["Make"].ToString(),
+                            Model = reader["Model"].ToString(),
+                            CreateDate = (DateTime)reader["CreateDate"],
+                            IsActive = reader["IsActive"].ToString(),
+                            CategoryId = (int)reader["catid"],
+                            FuelId = (int)reader["fid"],
+                            Category = new Category()
+                            {
+                                Id = (int)reader["catid"],
+                                CategoryName = reader["CategoryName"].ToString()
+                            },
+                            Fuel = new Fuel()
+                            {
+                                Id = (int)reader["fid"],
+                                FuelName = reader["FuelName"].ToString()
+                            }
+                        }
+                    });
                 }
 
                 await _dBConnect.conn.CloseAsync();
